@@ -138,5 +138,12 @@ zc () {
   curl --header "Authorization: Bearer $token" "$@"
 }
 
+# A shorcut for kubectl
 alias k=kubectl
+
+# Helpful while working on now dev
 alias now-dev="node ~/Code/now/packages/now-cli/dist"
+
+# Default to neovim
+alias vim=nvim
+alias vi=nvim

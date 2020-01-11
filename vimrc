@@ -5,18 +5,17 @@ Plug 'Quramy/vim-js-pretty-template'
 Plug 'airblade/vim-gitgutter'
 Plug 'alampros/vim-styled-jsx'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'jaredgorski/spacecamp'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'ryanoasis/vim-devicons'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'rakr/vim-one'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -34,6 +33,8 @@ let loaded_matchparen = 1
 set autoread                               " Autoread changes from files changes outside of vim
 set autowrite                              " Automatically :write before running commands
 set backspace=2                            " Backspace deletes like most programs in insert mode
+set colorcolumn=100                        " Display a ruler for the default max width
+set encoding=UTF-8                         " Always use UTF-8 as encoding
 set history=500                            " Increase vim history
 set incsearch                              " do incremental searching
 set laststatus=2                           " Always display the status line
@@ -50,10 +51,10 @@ set updatetime=500                         " Set refresh time more often for vim
 
 " Set the theme and airline theme
 syntax on
-set background=dark
-colorscheme one
+colorscheme gruvbox
 
-let g:airline_theme='one'
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts=1
 
 " Remap ESC key
 inoremap kj <Esc>

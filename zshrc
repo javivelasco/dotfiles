@@ -58,3 +58,9 @@ zplugin light zdharma/history-search-multi-word
 
 zplugin ice from"gh" wait"1" atinit"zpcompinit; zpcdreplay" lucid
 zplugin light zdharma/fast-syntax-highlighting
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/javivelasco/Code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/javivelasco/Code/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/javivelasco/Code/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/javivelasco/Code/google-cloud-sdk/completion.zsh.inc'; fi
