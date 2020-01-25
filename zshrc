@@ -45,20 +45,6 @@ zplugin light sharkdp/bat
 ##### FZF Setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# | autosuggestions | #
-zplugin ice wait"0" atload"_zsh_autosuggest_start" lucid
-zplugin light zsh-users/zsh-autosuggestions
-
-# search history via substring
-zplugin light zsh-users/zsh-history-substring-search 
-
-# search through long list of commands with Ctrl+R
-zplugin ice from"gh" wait"1" silent pick"history-search-multi-word.plugin.zsh" lucid
-zplugin light zdharma/history-search-multi-word
-
-zplugin ice from"gh" wait"1" atinit"zpcompinit; zpcdreplay" lucid
-zplugin light zdharma/fast-syntax-highlighting
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/javivelasco/Code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/javivelasco/Code/google-cloud-sdk/path.zsh.inc'; fi
 
