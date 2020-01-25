@@ -11,9 +11,6 @@ export LC_ALL='en_US.UTF-8';
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
-# Always enable colored `grep` output.
-export GREP_OPTIONS='--color=auto';
-
 # Always enable Docker builkit
 export DOCKER_BUILDKIT=1
 
@@ -25,4 +22,4 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/javive
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export TERM=xterm-256color
+export TERM="xterm-256color"
