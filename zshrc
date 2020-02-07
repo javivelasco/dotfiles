@@ -1,7 +1,15 @@
-### Added by Zplugin's installer
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f"
+fi
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit installer's chunk
 
 PS1=""
 autoload colors; colors
@@ -13,34 +21,34 @@ for file in ~/.{aliases,exports,functions,secrets}; do
 done;
 
 ##### Plugins
-zplugin ice wait'!' lucid
-zplugin light jackharrisonsherlock/common
+zinit ice wait'!' lucid
+zinit light jackharrisonsherlock/common
 
-zplugin ice wait lucid
-zplugin snippet OMZ::lib/git.zsh
+zinit ice wait lucid
+zinit snippet OMZ::lib/git.zsh
 
-zplugin ice wait atload"unalias grv" lucid
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice wait atload"unalias grv" lucid
+zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit ice wait lucid
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-zplugin ice wait as"completion" lucid
-zplugin snippet OMZ::plugins/docker/_docker
+zinit ice wait as"completion" lucid
+zinit snippet OMZ::plugins/docker/_docker
 
-zplugin ice wait atinit"zpcompinit" lucid
-zplugin light zdharma/fast-syntax-highlighting
+zinit ice wait atinit"zpcompinit" lucid
+zinit light zdharma/fast-syntax-highlighting
 
-zplugin ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zplugin light trapd00r/LS_COLORS
+zinit light trapd00r/LS_COLORS
 
-zplugin ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zplugin light sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 
 ##### FZF Setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
