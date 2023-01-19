@@ -1,0 +1,9 @@
+yarn-error.log
+node_modules/
+dump.rdb
+.env
+.next/
+.vscode
+spikes/
+spike.*
+
