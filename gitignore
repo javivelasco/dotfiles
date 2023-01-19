@@ -1,8 +1,0 @@
-.next/
-node_modules/
-dump.rdb
-.env
-.vscode
-yarn-error.log
-spike.ts
-
