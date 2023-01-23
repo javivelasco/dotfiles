@@ -124,6 +124,11 @@ _G.packer_plugins = {
     path = "/Users/javivelasco/.local/share/nvim/site/pack/packer/start/editorconfig.nvim",
     url = "https://github.com/gpanders/editorconfig.nvim"
   },
+  ["formatter.nvim"] = {
+    loaded = true,
+    path = "/Users/javivelasco/.local/share/nvim/site/pack/packer/start/formatter.nvim",
+    url = "https://github.com/mhartington/formatter.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/javivelasco/.local/share/nvim/site/pack/packer/start/friendly-snippets",

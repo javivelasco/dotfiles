@@ -34,7 +34,7 @@ vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Format using LSP
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>f", ":FormatWrite<CR>")
 
 -- Replace every occurence of the word under the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
