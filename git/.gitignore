@@ -6,4 +6,4 @@ dump.rdb
 .vscode
 spikes/
 spike.*
-
+.luarc.json
