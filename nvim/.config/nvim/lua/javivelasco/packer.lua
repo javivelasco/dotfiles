@@ -49,4 +49,5 @@ return require('packer').startup(function(use)
     use { 'tpope/vim-sensible' }
     use { 'windwp/nvim-autopairs' }
     use { 'windwp/nvim-ts-autotag' }
+    use { 'nvim-telescope/telescope-live-grep-args.nvim' }
 end)

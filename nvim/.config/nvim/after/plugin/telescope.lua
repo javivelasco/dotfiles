@@ -59,7 +59,7 @@ vim.keymap.set('n', '<leader>pb', function()
 end)
 
 vim.keymap.set('n', '<leader>ps', function()
-    builtin.live_grep()
+    extensions.live_grep_args.live_grep_args()
 end)
 
 vim.keymap.set('n', 'sf', function()
