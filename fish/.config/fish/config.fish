@@ -136,6 +136,8 @@ alias vi=nvim
 # Get header details in stderr so the output can be piped
 alias curld="curl -sD /dev/stderr"
 
+alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
+
 # Setup nvm
 set --universal nvm_default_version v16.13.0 
 
