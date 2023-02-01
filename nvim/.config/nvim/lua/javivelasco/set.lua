@@ -11,9 +11,9 @@ vim.opt.listchars:append({ trail = "·" })
 -- Fat cursor for edit mode
 vim.opt.guicursor = ""
 
--- Relative line numbers
+-- Disable relative line numbers
 vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- Indentation
 vim.opt.tabstop = 4
