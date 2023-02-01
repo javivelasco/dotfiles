@@ -268,6 +268,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/javivelasco/.local/share/nvim/site/pack/packer/start/vim-sensible",
     url = "https://github.com/tpope/vim-sensible"
+  },
+  ["vim-tmux-navigator"] = {
+    loaded = true,
+    path = "/Users/javivelasco/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
   }
 }
 
