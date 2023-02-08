@@ -39,7 +39,6 @@ return require('packer').startup(function(use)
     use { 'jose-elias-alvarez/null-ls.nvim' }
     use { 'lewis6991/gitsigns.nvim' }
     use { 'mbbill/undotree' }
-    use { 'mhartington/formatter.nvim' }
     use { 'neovim/nvim-lspconfig' }
     use { 'numToStr/Comment.nvim', requires = { 'JoosepAlviste/nvim-ts-context-commentstring' } }
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
