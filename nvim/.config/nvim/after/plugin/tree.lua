@@ -4,3 +4,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- empty setup using defaults
 require("nvim-tree").setup()
+
+vim.keymap.set({ "n", "v" }, "<leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>T", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
