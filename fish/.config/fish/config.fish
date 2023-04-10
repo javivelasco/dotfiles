@@ -11,8 +11,8 @@ set -gx HOMEBREW_SHELLENV_PREFIX /opt/homebrew
 set -gx MANPATH /opt/homebrew/share/man $MANPATH
 set -gx INFOPATH $INFOPATH /opt/homebrew/share/info
 
-set -gx BAT_THEME "gruvbox-dark"
-set -gx PNPM_HOME "/Users/javivelasco/Library/pnpm"
+set -gx BAT_THEME gruvbox-dark
+set -gx PNPM_HOME /Users/javivelasco/Library/pnpm
 set -gx GOPATH "/Users/javivelasco/.go"
 
 set -gx PATH $PATH /opt/homebrew/bin /opt/homebrew/sbin
@@ -31,10 +31,10 @@ alias dl="cd ~/Downloads"
 alias g="git"
 alias h="history"
 
-if ls --color > /dev/null 2>&1
-    set colorflag "--color"
+if ls --color >/dev/null 2>&1
+    set colorflag --color
 else # OS X `ls`
-    set colorflag "-G"
+    set colorflag -G
 end
 
 # List all files colorized in long format
@@ -74,10 +74,10 @@ alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # OS X has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
+command -v md5sum >/dev/null || alias md5sum="md5"
 
 # OS X has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
+command -v sha1sum >/dev/null || alias sha1sum="shasum"
 
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
@@ -139,11 +139,10 @@ alias curld="curl -sD /dev/stderr"
 alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 
 # Setup nvm
-set --universal nvm_default_version v16.13.0 
+set --universal nvm_default_version v16.18.1
 
 # Load secret config
 set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.fish
 if test -f $FISH_SECRET_CONFIG_PATH
-  source $FISH_SECRET_CONFIG_PATH
+    source $FISH_SECRET_CONFIG_PATH
 end
-
