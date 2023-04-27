@@ -1,11 +1,2 @@
-local status, git = pcall(require, "git")
-if (not status) then return end
-
-git.setup({
-    keymaps = {
-        -- Open blame window
-        blame = "<Leader>gb",
-        -- Open file/folder in git repository
-        browse = "<Leader>go",
-    }
-})
+vim.keymap.set("n", "<leader>go", "<CMD>lua require('git.browse').open(false)<CR>", { desc = "Open [G]it File [O]pen" })
+vim.keymap.set("n", "<leader>gb", "<CMD>lua require('git.blame').blame()<CR>", { desc = "[G]it [B]lame" })

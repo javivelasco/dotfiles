@@ -1,10 +1,6 @@
--- Color Scheme
-vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
-
 -- Set listchars
 vim.opt.list = true
-vim.opt.listchars:append({ eol = '↵' })
+vim.opt.listchars:append({ eol = "↵" })
 vim.opt.listchars:append({ nbsp = "·" })
 vim.opt.listchars:append({ trail = "·" })
 
