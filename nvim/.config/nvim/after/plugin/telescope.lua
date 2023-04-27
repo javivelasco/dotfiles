@@ -58,6 +58,11 @@ vim.keymap.set('n', '<leader>pb', function()
     builtin.buffers()
 end)
 
+vim.keymap.set('n', '<leader>gr', function() builtin.lsp_references() end)
+vim.keymap.set('n', '<leader>gd', function() builtin.lsp_definitions() end)
+vim.keymap.set('n', '<leader>gt', function() builtin.lsp_type_definitions() end)
+vim.keymap.set('n', '<leader>vd', function() builtin.diagnostics() end)
+
 vim.keymap.set('n', '<leader>ps', function()
     extensions.live_grep_args.live_grep_args()
 end)
