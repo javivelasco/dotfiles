@@ -138,8 +138,8 @@ alias curld="curl -sD /dev/stderr"
 
 alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 
-# Setup nvm
-set --universal nvm_default_version v16.18.1
+# Run fnm to manage node versions
+fnm env --use-on-cd | source
 
 # Load secret config
 set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.fish
