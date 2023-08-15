@@ -175,3 +175,5 @@
 
 [diff]
     colorMoved = default
+[submodule]
+	recurse = true
