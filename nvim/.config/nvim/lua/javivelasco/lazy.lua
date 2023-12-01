@@ -121,11 +121,12 @@ require("lazy").setup({
 	{
 		-- Add indentation guides even on blank lines
 		"lukas-reineke/indent-blankline.nvim",
-		-- Enable `lukas-reineke/indent-blankline.nvim`
-		-- See `:help indent_blankline.txt`
+    main = "ibl",
 		opts = {
-			char = "┊",
-			show_trailing_blankline_indent = false,
+      indent = { char = "┊" },
+      whitespace = {
+        remove_blankline_trail = false,
+    },
 		},
 	},
 
@@ -239,4 +240,10 @@ require("lazy").setup({
 		end,
 		opts = {},
 	},
+
+  {
+    -- Allows to have a buffer delete that doesn't close the window
+    -- so the layout is preserved
+    'famiu/bufdelete.nvim',
+  }
 }, {})

@@ -36,8 +36,8 @@ vim.keymap.set( "n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<S-w>", ":bdelete<CR>", { desc = "Delete buffer" })
-vim.keymap.set("n", "<S-d>", ":bw<CR>", { desc = "Close buffer" })
+vim.keymap.set("n", "<S-w>", ":Bdelete<CR>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<S-d>", ":Bw<CR>", { desc = "Close buffer" })
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize up" })
