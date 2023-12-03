@@ -1,6 +1,17 @@
 local lsp_zero = require("lsp-zero")
 
+local function ndmap(key, cmd, desc)
+  vim.keymap.set("n", key, cmd, { remap = false, desc = desc })
+end
+
+ndmap("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+ndmap("]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
+ndmap("<leader>e", vim.diagnostic.open_float, "Open floating diagnostic message")
+ndmap("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
+
 lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.default_keymaps({ buffer = bufnr })
+
   local builtin = require("telescope.builtin")
   local function telescope_lsp_references()
     builtin.lsp_references({ include_declaration = false, show_line = false })
@@ -22,10 +33,6 @@ lsp_zero.on_attach(function(client, bufnr)
   nmap("<leader>ds", builtin.lsp_document_symbols, "LSP: [D]ocument [S]ymbols")
   nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "LSP: [W]orkspace [S]ymbols")
   nmap("<leader>gr", telescope_lsp_references, "LSP: [G]oto [R]eferences")
-  nmap("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-  nmap("]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
-  nmap("<leader>e", vim.diagnostic.open_float, "Open floating diagnostic message")
-  nmap("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
 
 
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
@@ -44,7 +51,7 @@ local rust_tools = require('rust-tools')
 rust_tools.setup({
   server = {
     on_attach = function(_, bufnr)
-      vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
+      vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, { buffer = bufnr })
     end
   }
 })
@@ -62,6 +69,8 @@ require('mason-lspconfig').setup({
     end,
   }
 })
+
+lsp_zero.setup_servers({'lua_ls', 'rust_analyzer', 'tsserver', 'tailwindcss'})
 
 lsp_zero.configure("lua_ls", {
   settings = {
@@ -104,6 +113,11 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<C-Space>"] = cmp.mapping.complete(),
   }),
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
   window = {
     completion = cmp.config.window.bordered({}),
     documentation = cmp.config.window.bordered(),
@@ -121,12 +135,12 @@ vim.diagnostic.config({
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   vim.lsp.handlers.hover,
-  {border = 'rounded'}
+  { border = 'rounded' }
 )
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
-  {border = 'rounded'}
+  { border = 'rounded' }
 )
 
 vim.api.nvim_set_hl(0, 'NormalFloat', {
