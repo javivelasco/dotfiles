@@ -15,15 +15,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{
-		-- A port of gruvbox community theme to lua with treesitter support
-		"ellisonleao/gruvbox.nvim",
-		priority = 1000,
-		config = function()
-			vim.o.background = "dark"
-			vim.cmd("colorscheme gruvbox")
+  {
+    -- A port of gruvbox community theme to lua with treesitter support
+    "sainnhe/gruvbox-material",
+    priority = 1000,
+    config = function()
+			vim.cmd("colorscheme gruvbox-material")
 		end,
-	},
+  },
 
 	-- Sensible defaults
 	{ "tpope/vim-sensible" },
@@ -48,6 +47,7 @@ require("lazy").setup({
 			{ "hrsh7th/nvim-cmp" }, -- Required
 			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 			{ "L3MON4D3/LuaSnip" }, -- Required
+      { "onsails/lspkind.nvim" },
 		},
 	},
 
