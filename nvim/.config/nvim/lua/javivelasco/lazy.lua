@@ -245,5 +245,10 @@ require("lazy").setup({
     -- Allows to have a buffer delete that doesn't close the window
     -- so the layout is preserved
     'famiu/bufdelete.nvim',
+  },
+
+  {
+    -- Rust tools
+    'simrat39/rust-tools.nvim'
   }
 }, {})

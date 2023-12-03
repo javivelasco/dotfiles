@@ -40,6 +40,15 @@ lsp_zero.on_attach(function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
 end)
 
+local rust_tools = require('rust-tools')
+rust_tools.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
+    end
+  }
+})
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = { 'tsserver', 'rust_analyzer' },
@@ -48,6 +57,8 @@ require('mason-lspconfig').setup({
     lua_ls = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
       require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+    rust_analyzer = function()
     end,
   }
 })
