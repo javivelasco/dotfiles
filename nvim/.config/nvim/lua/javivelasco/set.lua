@@ -7,6 +7,9 @@ vim.opt.listchars:append({ trail = "·" })
 -- Fat cursor for edit mode
 vim.opt.guicursor = ""
 
+-- Highlight current line
+vim.opt.cursorline = true
+
 -- Disable relative line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = false
