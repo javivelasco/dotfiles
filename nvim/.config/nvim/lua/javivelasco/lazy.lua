@@ -15,14 +15,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    -- A port of gruvbox community theme to lua with treesitter support
-    "sainnhe/gruvbox-material",
-    priority = 1000,
-    config = function()
+	{
+		-- A port of gruvbox community theme to lua with treesitter support
+		"sainnhe/gruvbox-material",
+		priority = 1000,
+		config = function()
 			vim.cmd("colorscheme gruvbox-material")
 		end,
-  },
+	},
 
 	-- Sensible defaults
 	{ "tpope/vim-sensible" },
@@ -47,7 +47,7 @@ require("lazy").setup({
 			{ "hrsh7th/nvim-cmp" }, -- Required
 			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 			{ "L3MON4D3/LuaSnip" }, -- Required
-      { "onsails/lspkind.nvim" },
+			{ "onsails/lspkind.nvim" },
 		},
 	},
 
@@ -121,12 +121,12 @@ require("lazy").setup({
 	{
 		-- Add indentation guides even on blank lines
 		"lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+		main = "ibl",
 		opts = {
-      indent = { char = "┊" },
-      whitespace = {
-        remove_blankline_trail = false,
-    },
+			indent = { char = "┊" },
+			whitespace = {
+				remove_blankline_trail = false,
+			},
 		},
 	},
 
@@ -214,7 +214,7 @@ require("lazy").setup({
 	{
 		-- Standalone UI for nvim-lsp progress
 		"j-hui/fidget.nvim",
-    tag = "legacy",
+		tag = "legacy",
 		config = function()
 			require("fidget").setup()
 		end,
@@ -241,14 +241,27 @@ require("lazy").setup({
 		opts = {},
 	},
 
-  {
-    -- Allows to have a buffer delete that doesn't close the window
-    -- so the layout is preserved
-    'famiu/bufdelete.nvim',
-  },
+	{
+		-- Allows to have a buffer delete that doesn't close the window
+		-- so the layout is preserved
+		"famiu/bufdelete.nvim",
+	},
 
-  {
-    -- Rust tools
-    'simrat39/rust-tools.nvim'
-  }
+	{
+		-- Rust tools
+		"simrat39/rust-tools.nvim",
+	},
+
+	{
+		-- Use Lazyvim from vim
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("telescope").load_extension("lazygit")
+		end,
+	},
 }, {})
