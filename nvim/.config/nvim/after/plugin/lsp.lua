@@ -1,52 +1,64 @@
 local lsp_zero = require("lsp-zero")
 
-local function ndmap(key, cmd, desc)
-  vim.keymap.set("n", key, cmd, { remap = false, desc = desc })
-end
-
-ndmap("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-ndmap("]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
-ndmap("<leader>e", vim.diagnostic.open_float, "Open floating diagnostic message")
-ndmap("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
-
+-- Define keybindings for LSP
 lsp_zero.on_attach(function(client, bufnr)
-  lsp_zero.default_keymaps({ buffer = bufnr })
-
-  local builtin = require("telescope.builtin")
-  local function telescope_lsp_references()
-    builtin.lsp_references({ include_declaration = false, show_line = false })
-  end
-
-  local function nmap(key, cmd, desc)
-    vim.keymap.set("n", key, cmd, { buffer = bufnr, remap = false, desc = desc })
-  end
-
-  nmap("<leader>D", vim.lsp.buf.type_definition, "LSP: Type [D]efinition")
-  nmap("<leader>rn", vim.lsp.buf.rename, "LSP: [R]e[n]ame")
-  nmap("<leader>ca", vim.lsp.buf.code_action, "LSP: [C]ode [A]ction")
-  nmap("<leader>f", vim.lsp.buf.format, "LSP: [F]ormat current buffer")
-  nmap("<leader>K", vim.lsp.buf.signature_help, "LSP: Signature Documentation")
-  nmap("K", vim.lsp.buf.hover, "LSP: Hover Documentation")
-  nmap("gd", vim.lsp.buf.definition, "LSP: [G]oto [D]efinition")
-  nmap("gI", vim.lsp.buf.implementation, "LSP: [G]oto [I]mplementation")
-  nmap("gR", vim.lsp.buf.references, "LSP: [G]oto [R]eferences")
-  nmap("<leader>ds", builtin.lsp_document_symbols, "LSP: [D]ocument [S]ymbols")
-  nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "LSP: [W]orkspace [S]ymbols")
-  nmap("<leader>gr", telescope_lsp_references, "LSP: [G]oto [R]eferences")
-
-
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { buffer = bufnr, remap = false, desc = "LSP: Type [D]efinition" })
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, remap = false, desc = "LSP: [R]e[n]ame" })
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, remap = false, desc = "LSP: [C]ode [A]ction" })
+  vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = bufnr, remap = false, desc = "LSP: [F]ormat current buffer" })
+  vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, { buffer = bufnr, remap = false, desc = "LSP: Signature Documentation" })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, remap = false, desc = "LSP: Hover Documentation" })
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, remap = false, desc = "LSP: [G]oto [D]efinition" })
+  vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, remap = false, desc = "LSP: [G]oto [I]mplementation" })
+  vim.keymap.set("n", "gR", vim.lsp.buf.references, { buffer = bufnr, remap = false, desc = "LSP: [G]oto [R]eferences" })
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { remap = false, desc = "Go to previous diagnostic message" })
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { remap = false, desc = "Go to next diagnostic message" })
+  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { remap = false, desc = "Open floating diagnostic message" })
+  vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { remap = false, desc = "Open diagnostics list" })
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
     vim.lsp.buf.format()
   end, { desc = "LSP: Format current buffer" })
 
-  if client.name == "tsserver" then
-    client.server_capabilities.documentFormattingProvider = false
-  end
-
-  -- Disable semantic tokens, it ruins the colorscheme
-  client.server_capabilities.semanticTokensProvider = nil
+  local builtin = require("telescope.builtin")
+  vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols, { buffer = bufnr, remap = false, desc = "LSP: [D]ocument [S]ymbols" })
+  vim.keymap.set("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, { buffer = bufnr, remap = false, desc = "LSP: [W]orkspace [S]ymbols" })
+  vim.keymap.set("n", "<leader>gr", function ()
+    builtin.lsp_references({ include_declaration = false, show_line = false })
+  end, { buffer = bufnr, remap = false, desc = "LSP: [G]oto [R]eferences" })
 end)
 
+-- Setup LSP servers with the default configuration
+lsp_zero.setup_servers({
+  'lua_ls',
+  'rust_analyzer',
+  'tailwindcss',
+  'tsserver',
+})
+
+-- Setup LSP servers with custom configuration
+lsp_zero.set_server_config({
+  on_init = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
+
+-- Specific configuration for the tsserver LSP server
+require('lspconfig').tsserver.setup({
+  on_init = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentFormattingRangeProvider = false
+  end,
+})
+
+-- Define icons for LSP diagnostics
+lsp_zero.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = '»'
+})
+
+-- Configure Rust Tools which configures rust_analyzer
 local rust_tools = require('rust-tools')
 rust_tools.setup({
   server = {
@@ -56,45 +68,16 @@ rust_tools.setup({
   }
 })
 
+-- LSP Server manager
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = { 'tsserver', 'rust_analyzer' },
-  handlers = {
-    lsp_zero.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-    rust_analyzer = function()
-    end,
-  }
+  handlers = { lsp_zero.default_setup }
 })
 
-lsp_zero.setup_servers({'lua_ls', 'rust_analyzer', 'tsserver', 'tailwindcss'})
-
-lsp_zero.configure("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
-})
-
-lsp_zero.set_preferences({
-  suggest_lsp_servers = false,
-  sign_icons = {
-    error = "E",
-    warn = "W",
-    hint = "H",
-    info = "I",
-  },
-})
-
+-- Floating windows
 local cmp = require("cmp")
 local lspkind = require('lspkind')
-
 cmp.setup({
   sources = {
     { name = 'path' },
@@ -124,6 +107,7 @@ cmp.setup({
   },
 })
 
+-- Diagnostic windows
 vim.diagnostic.config({
   virtual_text = false,
   severity_sort = true,
@@ -133,6 +117,9 @@ vim.diagnostic.config({
   },
 })
 
+-- Visual configuration for hover windows
+vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   vim.lsp.handlers.hover,
   { border = 'rounded' }
@@ -142,11 +129,3 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
   { border = 'rounded' }
 )
-
-vim.api.nvim_set_hl(0, 'NormalFloat', {
-  link = 'Normal',
-})
-
-vim.api.nvim_set_hl(0, 'FloatBorder', {
-  bg = 'none',
-})
