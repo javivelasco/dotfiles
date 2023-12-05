@@ -111,7 +111,7 @@ cmp.setup({
 
 -- Diagnostic windows
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   severity_sort = true,
   float = {
     border = 'rounded',
