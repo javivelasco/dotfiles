@@ -70,7 +70,7 @@ vim.keymap.set("n", "<leader>/", function()
 	}))
 end, { desc = "[/] Fuzzily search in current buffer" })
 
-vim.keymap.set("n", "<leader>bf", function()
+vim.keymap.set("n", "<leader>b", function()
 	extensions.file_browser.file_browser({
 		path = "%:p:h",
 		cwd = telescope_buffer_dir(),

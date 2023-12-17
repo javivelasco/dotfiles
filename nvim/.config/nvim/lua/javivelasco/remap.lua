@@ -31,7 +31,7 @@ vim.keymap.set("i", "jk", "<Esc>", { desc = "Escape without using the escape key
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Replace every occurence of the word under the cursor
-vim.keymap.set( "n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace every occurence of the word under the cursor" })
+vim.keymap.set( "n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace every occurence of the word under the cursor" })
 
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
