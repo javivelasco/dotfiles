@@ -11,12 +11,11 @@ set -gx HOMEBREW_SHELLENV_PREFIX /opt/homebrew
 set -gx MANPATH /opt/homebrew/share/man $MANPATH
 set -gx INFOPATH $INFOPATH /opt/homebrew/share/info
 
-set -gx BAT_THEME gruvbox-dark
 set -gx PNPM_HOME /Users/javivelasco/Library/pnpm
 set -gx GOPATH "/Users/javivelasco/.go"
 
-set -gx PATH $PATH /opt/homebrew/bin /opt/homebrew/sbin
-set -gx PATH $PATH /opt/homebrew/opt/kubernetes-cli@1.22/bin
+set -gx PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
+set -gx PATH /opt/homebrew/opt/kubernetes-cli@1.22/bin $PATH
 set -gx PATH $PATH $(go env GOPATH)/bin
 set -gx PATH $PATH $PNPM_HOME
 set -gx PATH $PATH $HOME/.cargo/bin
@@ -136,10 +135,24 @@ alias vi=nvim
 # Get header details in stderr so the output can be piped
 alias curld="curl -sD /dev/stderr"
 
+# Deploy a single file to Vercel
 alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 
 # Run fnm to manage node versions
 fnm env | source
+
+# Aliases for replacing ll with a more modern version
+if type -q eza
+    alias ll "eza -l -g --icons"
+    alias lla "ll -a"
+end
+
+# Update bindings for fzf + fish shell
+fzf_configure_bindings --directory=\cf --git_status=\cg
+
+# Fzf default config for preview
+set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
+set -g FZF_LEGACY_KEYBINDINGS 0
 
 # Load secret config
 set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.fish
