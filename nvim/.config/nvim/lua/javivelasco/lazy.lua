@@ -26,6 +26,8 @@ require("lazy").setup({
 
 	-- Sensible defaults
 	{ "tpope/vim-sensible" },
+  { "tpope/vim-surround" },
+  { "tpope/vim-repeat" },
 
 	{
 		-- Configure LSP
