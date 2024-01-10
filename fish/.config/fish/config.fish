@@ -30,23 +30,17 @@ alias dl="cd ~/Downloads"
 alias g="git"
 alias h="history"
 
-if ls --color >/dev/null 2>&1
-    set colorflag --color
-else # OS X `ls`
-    set colorflag -G
-end
-
 # List all files colorized in long format
-alias l="ls -lF $colorflag"
+alias l="ls -lF --color"
 
 # List all files colorized in long format, including dot files
-alias la="ls -laF $colorflag"
+alias la="ls -laF --color"
 
 # # List only directories
-alias lsd="ls -lF $colorflag | grep --color=never '^d'"
+alias lsd="ls -lF --color | grep --color=never '^d'"
 
 # # Always use color output for `ls`
-alias ls="command ls $colorflag"
+alias ls="command ls --color"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -147,6 +141,9 @@ if type -q eza
     alias lla "ll -a"
 end
 
+# Do not highlight current user in eza
+set -x EZA_COLORS "uu=0:gu=0"
+
 # Update bindings for fzf + fish shell
 fzf_configure_bindings --directory=\cf --git_status=\cg
 
@@ -159,3 +156,4 @@ set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.
 if test -f $FISH_SECRET_CONFIG_PATH
     source $FISH_SECRET_CONFIG_PATH
 end
+
