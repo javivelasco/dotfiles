@@ -103,14 +103,6 @@ require("lazy").setup({
 		-- A blazing fast and easy to configure Neovim statusline written in Lua.
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = {
-				icons_enabled = true,
-				theme = "gruvbox",
-				component_separators = "|",
-				section_separators = "",
-			},
-		},
 	},
 
 	{
