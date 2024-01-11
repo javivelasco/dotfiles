@@ -53,9 +53,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-	{ "jose-elias-alvarez/null-ls.nvim" },
-
 	-- Additional lua configuration, makes nvim stuff amazing!
 	{ "folke/neodev.nvim" },
 
@@ -262,5 +259,81 @@ require("lazy").setup({
   {
     -- Spectre search and replace
     "nvim-pack/nvim-spectre"
+  },
+
+  {
+    -- An asynchronous linter plugin for Neovim
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        javascript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        markdown = { "vale" },
+        svelte = { "eslint_d" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+      }
+
+      -- This is a dirty hack so when eslint is not in the project
+      -- we don't get an annoying error at the top of the file.
+      local eslint = require('lint.linters.eslint')
+      local parser = eslint
+      eslint.parser = function(output, bufnr)
+        local lint_res = parser(output, bufnr)
+        if #lint_res == 1 and string.match(lint_res[1].message, "^Could not parse linter output") then
+          return {}
+        end
+        return parser(output, bufnr);
+      end
+
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint(nil, { ignore_errors = true })
+        end
+      })
+
+      vim.keymap.set("n", "<leader>l", function()
+        lint.try_lint(nil, { ignore_errors = true })
+      end, { desc = "Trigger linting for current file" })
+    end
+  },
+
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function ()
+      local conform = require("conform")
+
+      conform.setup({
+        formatters_by_ft = {
+          css = { "prettierd" },
+          html = { "prettierd" },
+          javascript = { "prettierd"},
+          javascriptreact = { "prettierd"},
+          json = { "prettierd" },
+          lua = { "stylua" },
+          markdown = { "prettierd" },
+          svelte = { "prettierd" },
+          typescript = { "prettierd"},
+          typescriptreact = { "prettierd"},
+          yaml = { "prettierd" }
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          async = false,
+        }
+      })
+
+      vim.keymap.set({ "n", "v" }, "<leader>f", function()
+        conform.format({
+          lsp_fallback = true,
+          async = false,
+        })
+      end, { desc = "Format file or range" })
+    end
   }
 }, {})
