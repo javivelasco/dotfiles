@@ -258,4 +258,9 @@ require("lazy").setup({
 			require("telescope").load_extension("lazygit")
 		end,
 	},
+
+  {
+    -- Spectre search and replace
+    "nvim-pack/nvim-spectre"
+  }
 }, {})
