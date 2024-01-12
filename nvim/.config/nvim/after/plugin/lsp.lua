@@ -87,8 +87,8 @@ lsp_zero.set_server_config({
 require("lspconfig").tsserver.setup({
   init_options = {
     preferences = {
-      includeInlayParameterNameHints = "all",
-      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      -- includeInlayParameterNameHints = "all",
+      -- includeInlayParameterNameHintsWhenArgumentMatchesName = true,
       includeInlayFunctionParameterTypeHints = true,
       includeInlayVariableTypeHints = true,
       includeInlayPropertyDeclarationTypeHints = true,
