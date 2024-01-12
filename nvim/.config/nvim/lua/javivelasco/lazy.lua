@@ -32,16 +32,13 @@ require("lazy").setup({
   {
     -- Configure LSP
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       -- LSP Support
       { "neovim/nvim-lspconfig" }, -- Required
       {
         -- Optional
         "williamboman/mason.nvim",
-        build = function()
-          pcall(vim.cmd, "MasonUpdate")
-        end,
       },
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
@@ -117,7 +114,7 @@ require("lazy").setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { "numToStr/Comment.nvim", dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" }, opts = {} },
+  { "numToStr/Comment.nvim", lazy = false, opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
