@@ -57,4 +57,8 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
 -- Select all
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
+-- Open LazyGit
 vim.keymap.set("n", "<leader>G", ":LazyGitCurrentFile<CR>", { desc = "Open LazyGit" })
+
+-- Make C-i work correctly with Alacritty
+vim.keymap.set("n", "<C-n>i", "<C-i>", {})
