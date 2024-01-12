@@ -197,7 +197,6 @@ require("lazy").setup({
   {
     -- Standalone UI for nvim-lsp progress
     "j-hui/fidget.nvim",
-    tag = "legacy",
     config = function()
       require("fidget").setup()
     end,
