@@ -85,22 +85,22 @@ lsp_zero.set_server_config({
 
 -- Specific configuration for the tsserver LSP server
 require("lspconfig").tsserver.setup({
-  init_options = {
-    preferences = {
-      -- includeInlayParameterNameHints = "all",
-      -- includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-      includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
-      includeInlayPropertyDeclarationTypeHints = true,
-      includeInlayFunctionLikeReturnTypeHints = true,
-      includeInlayEnumMemberValueHints = true,
-      importModuleSpecifierPreference = "non-relative",
-    },
-  },
+  -- init_options = {
+  --   preferences = {
+  -- includeInlayParameterNameHints = "all",
+  -- includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  -- includeInlayFunctionParameterTypeHints = true,
+  -- includeInlayVariableTypeHints = true,
+  -- includeInlayPropertyDeclarationTypeHints = true,
+  -- includeInlayFunctionLikeReturnTypeHints = true,
+  -- includeInlayEnumMemberValueHints = true,
+  -- importModuleSpecifierPreference = "non-relative",
+  --   },
+  -- },
   on_attach = function(client, bufnr)
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(bufnr, true)
-    end
+    -- if client.server_capabilities.inlayHintProvider then
+    --   vim.lsp.inlay_hint.enable(bufnr, true)
+    -- end
   end,
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = false
