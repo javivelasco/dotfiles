@@ -2,6 +2,7 @@ return {
   {
     -- Setup for init.lua and Plugin development
     "folke/neodev.nvim",
+    priority = 100,
     opts = {},
   },
 
