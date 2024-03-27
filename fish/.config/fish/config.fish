@@ -30,6 +30,19 @@ alias dl="cd ~/Downloads"
 alias g="git"
 alias h="history"
 
+# # Always use color output for `ls`
+alias ls="ls --color"
+
+# Aliases for replacing ll with a more modern version
+if type -q eza
+    alias ls="eza --icons"
+    alias ll="ls -l -g"
+    alias lla="ll -a"
+end
+
+# Do not highlight current user in eza
+set -x EZA_COLORS "uu=0:gu=0"
+
 # List all files colorized in long format
 alias l="ls -lF --color"
 
@@ -38,9 +51,6 @@ alias la="ls -laF --color"
 
 # # List only directories
 alias lsd="ls -lF --color | grep --color=never '^d'"
-
-# # Always use color output for `ls`
-alias ls="command ls --color"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -135,15 +145,6 @@ alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 # Run fnm to manage node versions
 fnm env | source
 
-# Aliases for replacing ll with a more modern version
-if type -q eza
-    alias ll "eza -l -g --icons"
-    alias lla "ll -a"
-end
-
-# Do not highlight current user in eza
-set -x EZA_COLORS "uu=0:gu=0"
-
 # Update bindings for fzf + fish shell
 fzf_configure_bindings --directory=\cf --git_status=\cg
 
@@ -156,4 +157,3 @@ set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.
 if test -f $FISH_SECRET_CONFIG_PATH
     source $FISH_SECRET_CONFIG_PATH
 end
-
