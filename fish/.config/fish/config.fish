@@ -30,6 +30,7 @@ alias .....="cd ../../../.."
 alias dl="cd ~/Downloads"
 alias g="git"
 alias h="history"
+alias lg="lazygit"
 
 # # Always use color output for `ls`
 alias ls="ls --color"
