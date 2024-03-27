@@ -10,6 +10,7 @@ set -gx HOMEBREW_REPOSITORY /opt/homebrew
 set -gx HOMEBREW_SHELLENV_PREFIX /opt/homebrew
 set -gx MANPATH /opt/homebrew/share/man $MANPATH
 set -gx INFOPATH $INFOPATH /opt/homebrew/share/info
+set -gx BAT_THEME "gruvbox-dark"
 
 set -gx PNPM_HOME /Users/javivelasco/Library/pnpm
 set -gx GOPATH "/Users/javivelasco/.go"
@@ -54,6 +55,9 @@ alias lsd="ls -lF --color | grep --color=never '^d'"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
+
+# Fallback cat to bat which is more modern
+alias cat="bat"
 
 # Get week number
 alias week='date +%V'
