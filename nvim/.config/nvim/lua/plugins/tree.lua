@@ -1,25 +1,25 @@
 return {
-  -- A file explorer tree for neovim written in lua
-  "nvim-tree/nvim-tree.lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    "MunifTanjim/nui.nvim",
+  },
+
   config = function()
-    require("nvim-tree").setup({
-      view = {
-        side = "right",
-        width = 50,
+    require("neo-tree").setup({
+      window = {
+        position = "right",
       },
     })
 
-    vim.keymap.set({ "n", "v" }, "<leader>T", ":NvimTreeFindFile<CR>", {
-      desc = "Find current buffer in Nvimtree",
-      noremap = true,
-      silent = true,
-    })
-
-    vim.keymap.set({ "n", "v" }, "<leader>t", ":NvimTreeToggle<CR>", {
+    vim.keymap.set({ "n", "v" }, "<leader>t", ":Neotree toggle<CR>", {
       desc = "Toggle Nvimtree",
       noremap = true,
       silent = true,
     })
+
+    vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
   end,
 }
