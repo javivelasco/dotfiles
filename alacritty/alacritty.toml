@@ -1,0 +1,88 @@
+import = ["/Users/javivelasco/.config/alacritty/gruvbox_material_medium_dark.toml"]
+
+[font]
+size = 13.5
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "\u0013j"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0013k"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0013h"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0013l"
+key = "L"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0013p"
+key = "LBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0013n"
+key = "RBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001Bt"
+key = "RBracket"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001BT"
+key = "LBracket"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013>"
+key = "Comma"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013<"
+key = "Comma"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u000Ei"
+key = "I"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0013%"
+key = "D"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\""
+key = "D"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0013c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013x"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013z"
+key = "Return"
+mods = "Command|Shift"
