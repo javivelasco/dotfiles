@@ -103,6 +103,7 @@ return {
         "rust_analyzer",
         "tailwindcss",
         "tsserver",
+        "gopls",
       })
 
       -- Setup LSP servers with custom configuration
