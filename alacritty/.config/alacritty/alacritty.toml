@@ -4,7 +4,7 @@ import = ["/Users/javivelasco/.config/alacritty/gruvbox_material_medium_dark.tom
 size = 13.5
 
 [font.normal]
-family = "FiraCode Nerd Font"
+family = "Fira Code"
 style = "Regular"
 
 [[keyboard.bindings]]

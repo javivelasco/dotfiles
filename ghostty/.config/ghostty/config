@@ -1,4 +1,6 @@
-font-family=FiraCode Nerd Font
+font-family=FiraCode Nerd Font Mono Ret
+font-feature = ss03
+font-feature = ss05
 
 palette=0=#1d2021
 palette=1=#fb4934
