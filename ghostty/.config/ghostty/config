@@ -1,6 +1,10 @@
 font-family=FiraCode Nerd Font Mono Ret
 font-feature = ss03
 font-feature = ss05
+font-size = 14.5
+
+# Stretch font rendering
+adjust-cell-width = -3%
 
 palette=0=#1d2021
 palette=1=#fb4934
