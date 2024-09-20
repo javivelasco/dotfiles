@@ -100,9 +100,8 @@ return {
       -- Setup LSP servers with the default configuration
       lsp_zero.setup_servers({
         "lua_ls",
-        "rust_analyzer",
         "tailwindcss",
-        "tsserver",
+        "ts_ls",
         "gopls",
       })
 
@@ -114,7 +113,7 @@ return {
       })
 
       -- Specific configuration for the tsserver LSP server
-      require("lspconfig").tsserver.setup({
+      require("lspconfig").ts_ls.setup({
         init_options = {
           preferences = {
             includeInlayParameterNameHints = "all",
@@ -149,7 +148,7 @@ return {
       -- LSP Server manager
       require("mason").setup({})
       require("mason-lspconfig").setup({
-        ensure_installed = { "tsserver", "rust_analyzer" },
+        ensure_installed = { "ts_ls" },
         handlers = { lsp_zero.default_setup },
       })
 
@@ -203,7 +202,7 @@ return {
       vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
       vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+          vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
     end,
   },
 

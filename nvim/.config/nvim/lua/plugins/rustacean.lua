@@ -1,6 +1,6 @@
 return {
   -- Supercharge your Rust experience
-  "mrcjkb/rustaceanvim",
-  version = "^4",
-  ft = { "rust" },
+  'mrcjkb/rustaceanvim',
+  version = '^5', -- Recommended
+  lazy = false,   -- This plugin is already lazy
 }
