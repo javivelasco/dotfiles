@@ -1,38 +1,52 @@
+function biome_or_prettierd(bufnr)
+  if require("conform").get_formatter_info("biome", bufnr).available then
+    return { "biome" }
+  else
+    return { "prettierd" }
+  end
+end
+
 return {
   {
     -- Lightweight yet powerful formatter plugin for Neovim
     "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local conform = require("conform")
-
-      conform.setup({
-        formatters_by_ft = {
-          css = { "prettierd" },
-          html = { "prettierd" },
-          javascript = { "prettierd" },
-          javascriptreact = { "prettierd" },
-          json = { "prettierd" },
-          -- lua = { "stylua" },
-          markdown = { "prettierd" },
-          svelte = { "prettierd" },
-          typescript = { "prettierd" },
-          typescriptreact = { "prettierd" },
-          yaml = { "prettierd" },
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        -- Customize or remove this keymap to your liking
+        "<leader>f",
+        function()
+          require("conform").format({ async = true })
+        end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
+    opts = {
+      formatters = {
+        biome = {
+          require_cwd = true,
         },
-        format_on_save = {
-          lsp_fallback = true,
-          async = false,
-        },
-      })
-
-      vim.keymap.set({ "n", "v" }, "<leader>f", function()
-        conform.format({
-          lsp_fallback = true,
-          async = false,
-        })
-      end, { desc = "Format file or range" })
-    end,
+      },
+      formatters_by_ft = {
+        css = { "prettierd" },
+        html = { "prettierd" },
+        javascript = biome_or_prettierd,
+        javascriptreact = biome_or_prettierd,
+        json = biome_or_prettierd,
+        -- lua = { "stylua" },
+        markdown = { "prettierd" },
+        svelte = biome_or_prettierd,
+        typescript = biome_or_prettierd,
+        typescriptreact = biome_or_prettierd,
+        yaml = { "prettierd" },
+      },
+      format_on_save = {
+        lsp_fallback = true,
+        async = false,
+      },
+    }
   },
 
   {
