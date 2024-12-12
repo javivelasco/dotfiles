@@ -162,3 +162,7 @@ set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.
 if test -f $FISH_SECRET_CONFIG_PATH
     source $FISH_SECRET_CONFIG_PATH
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
