@@ -5,7 +5,7 @@ We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow]
 The script `./scripts/homebrew` will take care of making sure Homebrew is installed and source the included `Brewfile` to install all dependencies (including Stow). Once that's done we can source all of the configuration files by running:
 
 ```bash
-stow -t $HOME -v brew fish git nvim tmux
+stow -t $HOME -v brew fish git nvim tmux aerospace
 ```
 
 This should create all symlinks to all require configuration so then we can bootstrap the dependencies detailed below.
