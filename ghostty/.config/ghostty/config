@@ -28,3 +28,7 @@ foreground=#e5d3a2
 selection-foreground=#32302f
 selection-background=#e5d3a2
 
+macos-icon = custom-style
+macos-icon-ghost-color = FFF
+macos-icon-screen-color = 282828
+
