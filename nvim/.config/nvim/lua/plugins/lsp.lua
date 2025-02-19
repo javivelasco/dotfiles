@@ -112,6 +112,10 @@ return {
         end,
       })
 
+      require('lspconfig').cssls.setup({
+        settings = { css = { lint = { unknownAtRules = 'ignore', }, }, },
+      })
+
       -- Specific configuration for the tsserver LSP server
       require("lspconfig").ts_ls.setup({
         init_options = {
