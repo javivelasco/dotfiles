@@ -6,4 +6,8 @@ font-size = 14.5
 # Stretch font rendering
 adjust-cell-width = -3%
 
+# window-padding-balance = true
+# background-blur-radius = 10
+# bold-is-bright = true
+
 theme = gruvbox
