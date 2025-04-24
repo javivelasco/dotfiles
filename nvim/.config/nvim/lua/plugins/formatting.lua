@@ -35,7 +35,7 @@ return {
         javascript = biome_or_prettierd,
         javascriptreact = biome_or_prettierd,
         json = biome_or_prettierd,
-        -- lua = { "stylua" },
+        lua = { "stylua" },
         markdown = { "prettierd" },
         svelte = biome_or_prettierd,
         typescript = biome_or_prettierd,
