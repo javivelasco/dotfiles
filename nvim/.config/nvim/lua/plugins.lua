@@ -22,10 +22,4 @@ return {
 
   -- Allows to have a buffer delete that doesn't close the window
   { "famiu/bufdelete.nvim" },
-
-  {
-    -- Insert or delete brackets, parens, quotes in pair.
-    "windwp/nvim-autopairs",
-    opts = { disable_filetype = { "TelescopePrompt" } },
-  },
 }

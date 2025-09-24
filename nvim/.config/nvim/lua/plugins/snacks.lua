@@ -1,64 +1,128 @@
 return {
   -- A collection of small QoL plugins for Neovim.
-  'folke/snacks.nvim',
+  "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   opts = {
     bigfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      preset = {
-        keys = {
-          { key = 's', icon = ' ', desc = 'Load session (directory)', action = ':lua require("persistence").load()' },
-          { key = 'l', icon = ' ', desc = 'Load last session', action = ':lua require("persistence").load({ last = true })' },
-          { key = 'f', icon = ' ', desc = 'Find files', action = ':lua require("telescope.builtin").git_files({ silent = true })' },
-          { key = 'r', icon = ' ', desc = 'Search in files', action = ':lua require("telescope.builtin").live_grep({ silent = true })' },
-        },
-        header = '',
-      },
-      sections = {
-        {
-          section = 'terminal',
-          cmd = [[
-set WALLPAPER $(echo "$HOME/.config/nvim/lua/background/golden.jpg" | shuf -n 1) && chafa "$WALLPAPER" --format symbols --symbols vhalf --size 60x14 --stretch
-            ]],
-          height = 16,
-          padding = 3,
-        },
-        { section = 'keys',   gap = 1, padding = 3 },
-        { section = 'startup' },
-      },
-
-    },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-    },
+    notifier = { enabled = true, timeout = 3000 },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
     styles = {
       notification = {
-        wo = { wrap = true } -- Wrap notifications
-      }
-    }
+        wo = { wrap = true }, -- Wrap notifications
+      },
+    },
   },
   keys = {
-    { "<leader>.",  function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-    { "<leader>n",  function() Snacks.notifier.show_history() end,   desc = "Notification History" },
-    { "<leader>bd", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-    { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
-    { "<leader>gB", function() Snacks.gitbrowse() end,               desc = "Git Browse" },
-    { "<leader>gb", function() Snacks.git.blame_line() end,          desc = "Git Blame Line" },
-    { "<leader>gf", function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" },
-    { "<leader>gg", function() Snacks.lazygit() end,                 desc = "Lazygit" },
-    { "<leader>gl", function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
-    { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
-    { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
-    { "<c-_>",      function() Snacks.terminal() end,                desc = "which_key_ignore" },
-    { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
-    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
+    {
+      "<leader>.",
+      function()
+        Snacks.scratch()
+      end,
+      desc = "Toggle Scratch Buffer",
+    },
+    {
+      "<leader>S",
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = "Select Scratch Buffer",
+    },
+    {
+      "<leader>n",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Notification History",
+    },
+    {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer",
+    },
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename File",
+    },
+    {
+      "<leader>gB",
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = "Git Browse",
+    },
+    {
+      "<leader>gb",
+      function()
+        Snacks.git.blame_line()
+      end,
+      desc = "Git Blame Line",
+    },
+    {
+      "<leader>gf",
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = "Lazygit Current File History",
+    },
+    {
+      "<leader>gg",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "Lazygit",
+    },
+    {
+      "<leader>gl",
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = "Lazygit Log (cwd)",
+    },
+    {
+      "<leader>un",
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = "Dismiss All Notifications",
+    },
+    {
+      "<c-/>",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "Toggle Terminal",
+    },
+    {
+      "<c-_>",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "which_key_ignore",
+    },
+    {
+      "]]",
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = "Next Reference",
+      mode = { "n", "t" },
+    },
+    {
+      "[[",
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = "Prev Reference",
+      mode = { "n", "t" },
+    },
     {
       "<leader>N",
       desc = "Neovim News",
@@ -76,7 +140,7 @@ set WALLPAPER $(echo "$HOME/.config/nvim/lua/background/golden.jpg" | shuf -n 1)
           },
         })
       end,
-    }
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -97,8 +161,9 @@ set WALLPAPER $(echo "$HOME/.config/nvim/lua/background/golden.jpg" | shuf -n 1)
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-          "<leader>uc")
+        Snacks.toggle
+          .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+          :map("<leader>uc")
         Snacks.toggle.treesitter():map("<leader>uT")
         Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
         Snacks.toggle.inlay_hints():map("<leader>uh")

@@ -7,3 +7,4 @@ dump.rdb
 spikes/
 spike.*
 .luarc.json
+~/Code/vibe-coding-agent/app/playground
