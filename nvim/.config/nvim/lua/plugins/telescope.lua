@@ -3,10 +3,21 @@ return {
     -- Use telescope to select things like Code Actions
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
+      local lga_actions = require("telescope-live-grep-args.actions")
       require("telescope").setup({
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
+          },
+
+          live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+              i = {
+                ["<C-h>"] = lga_actions.quote_prompt({ postfix = " --hidden" }),
+                ["<C-space>"] = lga_actions.to_fuzzy_refine,
+              },
+            },
           },
         },
       })
@@ -103,13 +114,16 @@ return {
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Search [G]it [F]iles" })
 
       vim.keymap.set("n", "<leader>ps", function()
         extensions.live_grep_args.live_grep_args()
       end, { desc = "[P]roject [S]earch Live Grep" })
+
+      vim.keymap.set("n", "<leader>pS", function()
+        require("telescope.builtin").resume()
+      end, { desc = "[P]roject Resume [S]earch Live Grep" })
 
       vim.keymap.set("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find(themes.get_dropdown({ previewer = false, winblend = 10 }))
