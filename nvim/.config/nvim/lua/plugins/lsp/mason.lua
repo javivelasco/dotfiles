@@ -13,7 +13,7 @@ return {
         "emmet_ls",
         "prismals",
         "pyright",
-        "eslint",
+        -- Note: vtsls is configured separately in vtsls.lua with nvim-vtsls
       },
     },
     dependencies = {
@@ -36,12 +36,13 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = {
       ensure_installed = {
-        "prettier", -- prettier formatter
+        "prettierd", -- prettier daemon (faster)
         "stylua", -- lua formatter
         "isort", -- python formatter
         "black", -- python formatter
-        "pylint",
-        "eslint_d",
+        "pylint", -- python linter
+        "eslint_d", -- eslint daemon (faster linting)
+        "vtsls", -- TypeScript/JavaScript LSP
       },
     },
     dependencies = {

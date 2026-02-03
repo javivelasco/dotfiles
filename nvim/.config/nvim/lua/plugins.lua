@@ -1,13 +1,4 @@
 return {
-  -- Sensible defaults
-  { "tpope/vim-sensible" },
-
-  -- Manage surround text objects
-  { "tpope/vim-surround" },
-
-  -- Repeat plugin commands with the dot command
-  { "tpope/vim-repeat" },
-
   -- Useful plugin to show you pending keybinds.
   { "folke/which-key.nvim", opts = {} },
 
@@ -20,6 +11,12 @@ return {
   -- Integrate navigation between tmux and vim
   { "christoomey/vim-tmux-navigator" },
 
-  -- Allows to have a buffer delete that doesn't close the window
-  { "famiu/bufdelete.nvim" },
+  -- Surround text objects (Lua rewrite of vim-surround)
+  -- Same keybindings: ys{motion}{char}, ds{char}, cs{old}{new}, S in visual
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
 }

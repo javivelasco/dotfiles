@@ -4,31 +4,22 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
-    lint.linters_by_ft = {
-      javascript = { "eslint" },
-      javascriptreact = { "eslint" },
-      markdown = { "vale" },
-      svelte = { "eslint" },
-      typescript = { "eslint" },
-      typescriptreact = { "eslint" },
-    }
 
-    -- This is a dirty hack so when eslint is not in the project
-    -- we don't get an annoying error at the top of the file.
-    local eslint = require("lint.linters.eslint")
-    local parser = eslint.parser
-    eslint.parser = function(output, bufnr)
-      local lint_res = parser(output, bufnr)
-      if #lint_res == 1 and string.match(lint_res[1].message, "^Could not parse linter output") then
-        return {}
-      end
-      return parser(output, bufnr)
-    end
+    -- Use eslint_d for faster linting (daemon mode)
+    lint.linters_by_ft = {
+      javascript = { "eslint_d" },
+      javascriptreact = { "eslint_d" },
+      typescript = { "eslint_d" },
+      typescriptreact = { "eslint_d" },
+      svelte = { "eslint_d" },
+      markdown = { "vale" },
+    }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
+        -- Only lint if eslint_d is available in PATH
         lint.try_lint()
       end,
     })

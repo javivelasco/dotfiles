@@ -1,9 +1,35 @@
 return {
-  "github/copilot.vim",
-  -- This is because I need node < 22 in some Vercel projects
-  commit = "dfe0a3a1c256167d181488a73ec6ccab8d8931a9",
-  config = function()
-    vim.g.copilot_no_tab_map = true
-    vim.api.nvim_set_keymap("i", "<C-l>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-  end,
+  {
+    -- Copilot core (Lua version)
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<C-l>",
+            accept_word = "<C-j>",
+            accept_line = "<C-k>",
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+        },
+        filetypes = {
+          markdown = true,
+          help = false,
+          gitcommit = true,
+          gitrebase = false,
+          ["."] = false,
+        },
+      })
+    end,
+  },
 }

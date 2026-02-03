@@ -1,4 +1,4 @@
-function biome_or_prettierd(bufnr)
+local function biome_or_prettierd(bufnr)
   if require("conform").get_formatter_info("biome", bufnr).available then
     return { "biome" }
   else
@@ -14,7 +14,6 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        -- Customize or remove this keymap to your liking
         "<leader>f",
         function()
           require("conform").format({ async = true })
@@ -45,17 +44,9 @@ return {
       format_on_save = {
         lsp_fallback = true,
         async = false,
+        timeout_ms = 3000,
       },
-    }
+    },
   },
-
-  {
-    -- Prettier plugin for Neovim's built-in LSP client.
-    "MunifTanjim/prettier.nvim",
-  },
-
-  {
-    -- EditorConfig plugin for Neovim written in Fennel
-    "gpanders/editorconfig.nvim",
-  },
+  -- Note: editorconfig is built into Neovim 0.9+, no plugin needed
 }

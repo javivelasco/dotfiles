@@ -1,5 +1,11 @@
--- Disable ts_ls since we use typescript-tools.nvim instead
+-- Disable LSP servers we don't want auto-started
+-- We configure vtsls manually in plugins/vtsls.lua
 vim.lsp.enable("ts_ls", false)
+vim.lsp.enable("tsserver", false)
+vim.lsp.enable("vtsls", false) -- Prevent auto-start, we start it via lspconfig
+
+-- Disable eslint LSP (we use nvim-lint with eslint_d instead)
+vim.lsp.enable("eslint", false)
 
 local keymap = vim.keymap -- for conciseness
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -52,10 +58,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     opts.desc = "Restart LSP"
     keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+    opts.desc = "Toggle Inlay Hints"
+    keymap.set("n", "<leader>ih", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, opts)
   end,
 })
 
--- vim.lsp.inlay_hint.enable(true)
+-- Enable inlay hints globally (toggle with <leader>ih if needed)
+vim.lsp.inlay_hint.enable(true)
 
 local severity = vim.diagnostic.severity
 
