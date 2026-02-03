@@ -46,8 +46,8 @@
   bpr = !gh pr view --web
   cis = !gh pr checks
   pco = !gh pr checkout
-  pr-bug = !hub pull-request -a javivelasco -l bug
-  issue = !hub issue create
+  pr-bug = !gh pr create -a javivelasco -l bug
+  issue = !gh issue create
 
   # fetch
   fo = fetch -p origin
@@ -108,6 +108,7 @@
   summary = true
   verbosity = 1
   tool = mvimdiff
+  conflictstyle = diff3
 
 [apply]
   whitespace = nowarn
@@ -129,9 +130,6 @@
 [advice]
   statusHints = false
 
-[diff]
-    tool = vimdiff
-
 [difftool]
     prompt = false
 
@@ -144,18 +142,13 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-
-[user]
-	name = Javi Velasco
-	email = javier.velasco86@gmail.com
-	signingkey = 7611065985B1E9D2
 
 [pager]
   branch = false
@@ -170,10 +163,12 @@
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
-[merge]
-    conflictstyle = diff3
-
 [diff]
+    tool = vimdiff
     colorMoved = default
+
 [submodule]
 	recurse = true
+
+[rerere]
+	enabled = true

@@ -1,0 +1,74 @@
+# Minimal Starship prompt configuration
+
+command_timeout = 1000
+add_newline = false
+
+# Only show: directory, git info, then prompt character on new line
+format = """
+$directory\
+$git_branch\
+$git_status
+$character"""
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "blue bold"
+
+[git_branch]
+symbol = ""
+style = "purple"
+format = "[$branch]($style) "
+
+[git_status]
+style = "red"
+format = "[$all_status$ahead_behind]($style)"
+ahead = "↑"
+behind = "↓"
+diverged = "↕"
+conflicted = "="
+untracked = "?"
+stashed = "*"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# Disable noisy modules
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[package]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[python]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true

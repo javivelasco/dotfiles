@@ -20,6 +20,10 @@ set -gx PATH /opt/homebrew/opt/kubernetes-cli@1.22/bin $PATH
 set -gx PATH $PATH $(go env GOPATH)/bin
 set -gx PATH $PATH $PNPM_HOME
 set -gx PATH $PATH $HOME/.cargo/bin
+set -gx PATH $PATH $HOME/.local/bin
+
+set -gx PYENV_ROOT "$HOME/.pyenv"
+set -gx BUN_INSTALL "$HOME/.bun"
 
 set fish_greeting ""
 
@@ -106,7 +110,7 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]))"'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
@@ -147,15 +151,31 @@ alias curld="curl -sD /dev/stderr"
 # Deploy a single file to Vercel
 alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 
+alias ec2-iad="ssh -i ~/.ssh/javi.pem ec2-user@3.90.168.9"
+
+# Improved defaults
+alias df="df -h"
+alias du="du -h"
+alias mkdir="mkdir -pv"
+alias rg="rg --smart-case"
+alias preview="fzf --preview 'bat --color=always {}'"
+
 # Run fnm to manage node versions
 fnm env | source
 
 # Update bindings for fzf + fish shell
 fzf_configure_bindings --directory=\cf --git_status=\cg
 
-# Fzf default config for preview
-set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
-set -g FZF_LEGACY_KEYBINDINGS 0
+# FZF configuration
+set -gx FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border --info=inline"
+set -gx FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
+set -gx FZF_LEGACY_KEYBINDINGS 0
+
+if command -q fd
+    set -gx FZF_DEFAULT_COMMAND "fd --type f --hidden --exclude .git"
+    set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+    set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --exclude .git"
+end
 
 # Load secret config
 set FISH_SECRET_CONFIG_PATH (dirname (status --current-filename))/config-secret.fish
@@ -170,3 +190,42 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init.fish 2>/dev/null || :
+
+# zoxide (smart cd) - replaces z plugin
+if command -q zoxide
+    zoxide init fish | source
+end
+
+# Lazy-load pyenv (faster shell startup)
+function pyenv --description "Lazy-load pyenv"
+    functions -e pyenv
+    fish_add_path --path $PYENV_ROOT/bin
+    if command -q pyenv
+        source (pyenv init - | psub)
+    end
+    command pyenv $argv
+end
+
+# Git abbreviations (expand in command line for better history)
+abbr -a gst "git status"
+abbr -a gco "git checkout"
+abbr -a gcm "git commit -m"
+abbr -a gca "git commit --amend"
+abbr -a gp "git push"
+abbr -a gpl "git pull"
+abbr -a gd "git diff"
+abbr -a gds "git diff --staged"
+abbr -a ga "git add"
+abbr -a gaa "git add -A"
+abbr -a gb "git branch"
+abbr -a glog "git log --oneline --graph"
+abbr -a grb "git rebase"
+abbr -a grbi "git rebase -i"
+abbr -a grs "git reset"
+abbr -a gsh "git stash"
+abbr -a gshp "git stash pop"
+
+# Starship prompt (modern, informative prompt)
+if command -q starship
+    starship init fish | source
+end

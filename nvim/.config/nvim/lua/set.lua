@@ -4,8 +4,8 @@ vim.opt.listchars:append({ eol = "↵" })
 vim.opt.listchars:append({ nbsp = "·" })
 vim.opt.listchars:append({ trail = "·" })
 
--- Fat cursor for edit mode
-vim.opt.guicursor = ""
+-- Cursor shape changes based on mode (block in normal, line in insert)
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 -- Highlight current line
 vim.opt.cursorline = true

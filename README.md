@@ -5,7 +5,7 @@ We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow]
 The script `./scripts/homebrew` will take care of making sure Homebrew is installed and source the included `Brewfile` to install all dependencies (including Stow). Once that's done we can source all of the configuration files by running:
 
 ```bash
-stow -t $HOME -v brew fish git nvim tmux aerospace
+stow -t $HOME -v brew fish git nvim tmux aerospace ghostty starship yazi
 ```
 
 This should create all symlinks to all require configuration so then we can bootstrap the dependencies detailed below.
@@ -16,11 +16,11 @@ This should create all symlinks to all require configuration so then we can boot
 
 ### Nvim
 
-There is not a lot of special things on setting up `nvim`. After installing all `brew` dependencies it should be already there. Dependencies are managed with [Packer]() so it's just a matter of going to the `packer.lua` file and sourcing (`:so`) and then running `:PackerSync`.
+There is not a lot of special things on setting up `nvim`. After installing all `brew` dependencies it should be already there. Dependencies are managed with [lazy.nvim](https://github.com/folke/lazy.nvim) which bootstraps itself automatically on first launch and syncs plugins.
 
 ### Tmux
 
-To manage `tmux` dependencies we are using [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) so the first step is to install it. Once it is there it's we can simply run the Prefix plus capital I to install (`<C-b>I`).
+To manage `tmux` dependencies we are using [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) so the first step is to install it. Once it is there we can simply run the Prefix plus capital I to install (`<C-s>I`).
 
 ## A note on Homebrew
 
@@ -30,8 +30,8 @@ To track installed dependencies and source every installed packages we use a `Br
 brew bundle dump --global --force
 ```
 
-As an alternative to installing packages and then dumping, can we directly install with `install` and uninstall with `remove`:
+Alternatively, add formulas directly to the `.Brewfile` and run:
 
 ```bash
-brew bundle --global install <formula>
+brew bundle --global
 ```
