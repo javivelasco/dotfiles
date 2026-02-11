@@ -5,10 +5,45 @@ We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow]
 The script `./scripts/homebrew` will take care of making sure Homebrew is installed and source the included `Brewfile` to install all dependencies (including Stow). Once that's done we can source all of the configuration files by running:
 
 ```bash
-stow -t $HOME -v brew fish git nvim tmux aerospace ghostty starship yazi
+stow -t $HOME -v brew fish git nvim tmux aerospace ghostty starship yazi claude agents
 ```
 
 This should create all symlinks to all require configuration so then we can bootstrap the dependencies detailed below.
+
+### Claude Code
+
+Configuration for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI.
+
+**`claude` package** manages `~/.claude/`:
+
+- `settings.json` - Model preferences and permissions
+- `CLAUDE.md` - Personal memory/instructions for all projects
+- `agents/` - Custom subagents (software-architect, linear-* integrations)
+- `rules/` - Personal coding rules (modular .md files)
+
+Runtime data (history, cache, telemetry, todos) is excluded via `.stow-local-ignore` and remains local to each machine.
+
+**`agents` package** manages `~/.agents/`:
+
+- `skills/` - Reusable AI agent skills from [skills.sh](https://skills.sh/)
+- `.skill-lock.json` - Tracks skill sources and versions for updates
+
+Skills are managed via the [skills CLI](https://skills.sh/):
+
+```bash
+npx skills list -g          # List installed global skills
+npx skills check            # Check for updates
+npx skills update           # Update all skills
+npx skills add <repo> -g    # Install a skill globally
+npx skills find <query>     # Search for skills
+```
+
+After stowing on a new machine, verify skill state:
+
+```bash
+npx skills check
+npx skills update
+```
 
 ### Fish
 

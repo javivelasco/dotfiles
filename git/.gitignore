@@ -8,3 +8,4 @@ spikes/
 spike.*
 .luarc.json
 ~/Code/vibe-coding-agent/app/playground
+.claude/settings.local.json

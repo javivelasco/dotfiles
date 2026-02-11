@@ -4,3 +4,6 @@ yazi/.config/yazi/flavors
 git/.gitconfig.user
 fish/.config/fish/config-secret.fish
 
+# Project-level Claude config (not the stow package)
+/.claude
+

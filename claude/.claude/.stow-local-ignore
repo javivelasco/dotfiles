@@ -1,0 +1,18 @@
+# Runtime and cache data - never stow
+cache
+debug
+downloads
+file-history
+history.jsonl
+paste-cache
+plans
+projects
+session-env
+shell-snapshots
+stats-cache.json
+statsig
+tasks
+telemetry
+todos
+plugins
+skills
