@@ -2,6 +2,13 @@
   "version": 3,
   "skills": {},
   "lastSelectedAgents": [
+    "amp",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode",
     "claude-code"
   ],
   "dismissed": {
