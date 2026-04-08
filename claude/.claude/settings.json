@@ -3,6 +3,5 @@
     "allow": [
       "mcp__pencil"
     ]
-  },
-  "model": "opus[1m]"
+  }
 }
