@@ -229,3 +229,6 @@ abbr -a gshp "git stash pop"
 if command -q starship
     starship init fish | source
 end
+
+# opencode
+fish_add_path /Users/javivelasco/.opencode/bin
