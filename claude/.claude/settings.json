@@ -3,5 +3,8 @@
     "allow": [
       "mcp__pencil"
     ]
+  },
+  "enabledPlugins": {
+    "vercel-plugin@vercel": true
   }
 }
