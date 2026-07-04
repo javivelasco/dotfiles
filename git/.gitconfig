@@ -124,7 +124,7 @@
 [core]
 	autocrlf = input
   editor = nvim
-	excludesfile = /Users/javivelasco/.gitignore
+	excludesfile = ~/.gitignore
   pager = delta --side-by-side
 
 [advice]

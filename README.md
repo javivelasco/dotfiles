@@ -1,14 +1,37 @@
 ## Dotfiles 🏡
 
-We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles. The very first step to source all configuration consists of installing both and then using `stow` to generate symlinks to the home folder.
+We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles.
 
-The script `./scripts/homebrew` will take care of making sure Homebrew is installed and source the included `Brewfile` to install all dependencies (including Stow). Once that's done we can source all of the configuration files by running:
+### Setting up a new machine
 
 ```bash
-stow -t $HOME -v brew fish git nvim tmux aerospace ghostty starship yazi claude agents
+git clone https://github.com/javivelasco/dotfiles.git ~/Code/dotfiles
+cd ~/Code/dotfiles
+
+# 1. Install Homebrew + all dependencies from the Brewfile (includes stow
+#    and fish) and make fish the default shell
+./scripts/homebrew
+
+# 2. Symlink every dotfile package into $HOME
+#    (safe to re-run anytime; it prunes stale links too)
+./scripts/stow
+
+# 3. Create the machine-local secret files (gitignored, never committed)
+cat > git/.gitconfig.user <<'EOF'
+[user]
+	name = Your Name
+	email = you@example.com
+EOF
+touch fish/.config/fish/config-secret.fish  # tokens/env vars, optional
+
+# 4. Re-run stow so the new secret files get linked
+./scripts/stow
 ```
 
-This should create all symlinks to all require configuration so then we can bootstrap the dependencies detailed below.
+Then finish the per-tool bootstrap steps below (Fish, Tmux, Yazi).
+
+> The list of stowed packages lives in `./scripts/stow` — update it there
+> when adding or removing a package.
 
 ### Claude Code
 
@@ -18,10 +41,11 @@ Configuration for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 
 
 - `settings.json` - Model preferences and permissions
 - `CLAUDE.md` - Personal memory/instructions for all projects
+- `lessons.md` - Patterns learned from corrections (self-improvement loop)
 - `agents/` - Custom subagents (software-architect, linear-* integrations)
 - `rules/` - Personal coding rules (modular .md files)
 
-Runtime data (history, cache, telemetry, todos) is excluded via `.stow-local-ignore` and remains local to each machine.
+Runtime data (history, cache, telemetry, todos) is excluded via `.stow-local-ignore` and remains local to each machine. The stow script pre-creates `~/.claude` as a real directory so runtime data never lands inside this repo.
 
 **`agents` package** manages `~/.agents/`:
 
@@ -47,15 +71,35 @@ npx skills update
 
 ### Fish
 
-[Fish](https://github.com/fish-shell/fish-shell) is the shell of preference at the moment and it is installed from Homebrew. Once installed we have to make it the default one and install [Fisher](https://github.com/jorgebucaran/fisher), the plugin manager following instructions from the Github repository. Finally we can run `fisher update` to make sure all plugins get installed.
+[Fish](https://github.com/fish-shell/fish-shell) is the shell of preference at the moment and it is installed from Homebrew (`./scripts/homebrew` also makes it the default shell). Then install [Fisher](https://github.com/jorgebucaran/fisher), the plugin manager, following instructions from the Github repository. Finally run `fisher update` to install all plugins from the stowed `fish_plugins` file.
+
+Machine-local secrets (tokens, private env vars) go in `fish/.config/fish/config-secret.fish` — it is gitignored and sourced automatically when present.
+
+### Git
+
+Identity and any other personal git config live in `git/.gitconfig.user`, which is included from `.gitconfig` and gitignored so it never gets committed. Create it on each machine (see setup above).
 
 ### Nvim
 
-There is not a lot of special things on setting up `nvim`. After installing all `brew` dependencies it should be already there. Dependencies are managed with [lazy.nvim](https://github.com/folke/lazy.nvim) which bootstraps itself automatically on first launch and syncs plugins.
+There is not a lot of special things on setting up `nvim`. After installing all `brew` dependencies it should be already there. Dependencies are managed with [lazy.nvim](https://github.com/folke/lazy.nvim) which bootstraps itself automatically on first launch and syncs plugins. LSP servers and tools are installed automatically by mason on first launch too.
 
 ### Tmux
 
-To manage `tmux` dependencies we are using [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) so the first step is to install it. Once it is there we can simply run the Prefix plus capital I to install (`<C-s>I`).
+To manage `tmux` dependencies we are using [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) so the first step is to install it:
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Once it is there we can simply run the Prefix plus capital I to install (`<C-s>I`).
+
+### Yazi
+
+The theme flavor (`gruvbox-dark`) is managed by yazi's package manager and gitignored, so on a new machine install it from the tracked `package.toml`:
+
+```bash
+ya pkg install
+```
 
 ## A note on Homebrew
 

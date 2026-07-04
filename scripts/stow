@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Symlink all dotfile packages into $HOME using GNU Stow.
+# Safe to re-run at any time (uses --restow, which also prunes stale links).
+
+set -e
+
+ROOT_DIRECTORY="$(cd "$(dirname "$0")/.." && pwd)"
+
+if ! command -v stow &> /dev/null; then
+  echo "ERROR: stow is not installed. Run ./scripts/homebrew first." >&2
+  exit 1
+fi
+
+# The single source of truth for stow packages
+PACKAGES=(
+  agents
+  brew
+  claude
+  fish
+  ghostty
+  git
+  nvim
+  starship
+  tmux
+  yazi
+)
+
+# Pre-create directories that receive machine-local runtime data so stow
+# never "folds" them into a symlink pointing inside this repo. Without this,
+# on a fresh machine Claude Code history, fisher plugins, etc. would be
+# written straight into the repo working tree.
+# (~/.agents intentionally folds: skills are managed inside the repo.)
+mkdir -p "$HOME/.config/fish" "$HOME/.claude"
+
+echo " --> Stowing packages: ${PACKAGES[*]}"
+stow --dir "$ROOT_DIRECTORY" --target "$HOME" --restow --verbose "${PACKAGES[@]}"
+
+echo " --> Done!"
