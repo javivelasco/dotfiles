@@ -2,6 +2,8 @@
 
 We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles.
 
+Migrating to a brand new machine? Follow [MIGRATION.md](MIGRATION.md) — it covers everything the dotfiles can't (keys, auth, app data).
+
 ### Setting up a new machine
 
 ```bash
@@ -73,6 +75,10 @@ After stowing on a new machine, verify skill state:
 npx skills check
 npx skills update
 ```
+
+### OpenCode
+
+The `opencode` package manages `~/.config/opencode/opencode.json` (MCP servers and preferences). Runtime data (auth, node_modules, machine-local skills) stays out of the repo.
 
 ### Fish
 
