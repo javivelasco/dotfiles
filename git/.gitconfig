@@ -31,6 +31,7 @@
   # checkout
   co = checkout                     # checkout
   nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+  sw = !git branch --sort=-committerdate --format='%(refname:short)' | fzf --header 'checkout branch' --reverse --preview 'git log --oneline --color -20 {}' | xargs git checkout
 
   # cherry-pick
   cp = cherry-pick -x               # grab a change from a branch
@@ -100,26 +101,43 @@
 [mergetool]
   prompt = false
 
-[mergetool "mvimdiff"]
-  cmd="nvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
-  keepbackup=false
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
+  keepbackup = false
 
 [merge]
   summary = true
   verbosity = 1
-  tool = mvimdiff
-  conflictstyle = diff3
+  tool = nvimdiff
+  conflictstyle = zdiff3
 
 [apply]
   whitespace = nowarn
 
 [branch]
   autosetupmerge = true
+  sort = -committerdate
 
 [push]
   # 'git push' will push the current branch to its tracking branch
   # the usual default is to push all branches
   default = current
+  # create the remote branch automatically on first push
+  autoSetupRemote = true
+
+[init]
+  defaultBranch = main
+
+[help]
+  # suggest the corrected command and ask before running it
+  autocorrect = prompt
+
+[rebase]
+  autostash = true
+  autosquash = true
+
+[fetch]
+  prune = true
 
 [core]
 	autocrlf = input
@@ -156,9 +174,6 @@
 [interactive]
     diffFilter = delta --color-only
 
-[add.interactive]
-    useBuiltin = false
-
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
@@ -166,6 +181,7 @@
 [diff]
     tool = vimdiff
     colorMoved = default
+    algorithm = histogram
 
 [submodule]
 	recurse = true

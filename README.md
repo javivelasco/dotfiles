@@ -8,6 +8,11 @@ We use [Homebrew](https://brew.sh/) as dependency manager for Mac and [GNU Stow]
 git clone https://github.com/javivelasco/dotfiles.git ~/Code/dotfiles
 cd ~/Code/dotfiles
 
+# Everything at once (homebrew + stow, then prints the manual steps):
+./setup
+
+# ...or step by step:
+
 # 1. Install Homebrew + all dependencies from the Brewfile (includes stow
 #    and fish) and make fish the default shell
 ./scripts/homebrew
@@ -85,13 +90,7 @@ There is not a lot of special things on setting up `nvim`. After installing all 
 
 ### Tmux
 
-To manage `tmux` dependencies we are using [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) so the first step is to install it:
-
-```bash
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-Once it is there we can simply run the Prefix plus capital I to install (`<C-s>I`).
+Dependencies are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm). On a fresh machine tpm and all plugins install themselves automatically the first time tmux starts. To install/update plugins manually use Prefix plus capital I (`<C-s>I`) or U.
 
 ### Yazi
 

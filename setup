@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# One-command bootstrap for a new machine.
+# Each step is idempotent, so this is safe to re-run.
+
+set -e
+
+cd "$(dirname "$0")"
+
+./scripts/homebrew
+./scripts/stow
+
+echo ""
+echo "Remaining manual steps (see README):"
+echo "  1. Create git/.gitconfig.user and fish config-secret.fish, then re-run ./scripts/stow"
+echo "  2. Install fisher and run 'fisher update'"
+echo "  3. Start tmux (tpm and plugins auto-install on first launch)"
+echo "  4. Run 'ya pkg install' for the yazi flavor"
+echo "  5. Install agent skills (manual)"

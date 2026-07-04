@@ -12,12 +12,11 @@ set -gx MANPATH /opt/homebrew/share/man $MANPATH
 set -gx INFOPATH $INFOPATH /opt/homebrew/share/info
 set -gx BAT_THEME "gruvbox-dark"
 
-set -gx PNPM_HOME /Users/javivelasco/Library/pnpm
-set -gx GOPATH "/Users/javivelasco/.go"
+set -gx PNPM_HOME $HOME/Library/pnpm
+set -gx GOPATH "$HOME/.go"
 
 set -gx PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
-set -gx PATH /opt/homebrew/opt/kubernetes-cli@1.22/bin $PATH
-set -gx PATH $PATH $(go env GOPATH)/bin
+set -gx PATH $PATH $GOPATH/bin
 set -gx PATH $PATH $PNPM_HOME
 set -gx PATH $PATH $HOME/.cargo/bin
 set -gx PATH $PATH $HOME/.local/bin
@@ -151,8 +150,6 @@ alias curld="curl -sD /dev/stderr"
 # Deploy a single file to Vercel
 alias deploy-single-file="~/Code/deploy-single-file/bin/deploy-single-file"
 
-alias ec2-iad="ssh -i ~/.ssh/javi.pem ec2-user@3.90.168.9"
-
 # Improved defaults
 alias df="df -h"
 alias du="du -h"
@@ -184,7 +181,6 @@ if test -f $FISH_SECRET_CONFIG_PATH
 end
 
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 # Added by OrbStack: command-line tools and integration
@@ -231,4 +227,4 @@ if command -q starship
 end
 
 # opencode
-fish_add_path /Users/javivelasco/.opencode/bin
+fish_add_path $HOME/.opencode/bin
