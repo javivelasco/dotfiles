@@ -1,8 +1,7 @@
 -- Disable LSP servers we don't want auto-started
--- We configure vtsls manually in plugins/vtsls.lua
+-- TypeScript servers (tsgo default, vtsls fallback) are managed in plugins/typescript.lua
 vim.lsp.enable("ts_ls", false)
-vim.lsp.enable("tsserver", false)
-vim.lsp.enable("vtsls", false) -- Prevent auto-start, we start it via lspconfig
+vim.lsp.enable("vtsls", false) -- typescript.lua enables tsgo and toggles vtsls on demand
 
 -- Disable eslint LSP (we use nvim-lint with eslint_d instead)
 vim.lsp.enable("eslint", false)

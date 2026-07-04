@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = {
       -- list of servers for mason to install
       ensure_installed = {
@@ -13,12 +13,22 @@ return {
         "emmet_ls",
         "prismals",
         "pyright",
-        -- Note: vtsls is configured separately in vtsls.lua with nvim-vtsls
+        -- Note: TypeScript servers (tsgo/vtsls) are configured in typescript.lua
+      },
+      -- mason-lspconfig v2 auto-enables every installed server via vim.lsp.enable.
+      -- Exclude the ones we manage manually (TS toggle) or don't want at all.
+      automatic_enable = {
+        exclude = {
+          "tsgo",
+          "vtsls",
+          "ts_ls",
+          "eslint", -- we lint with eslint_d through nvim-lint instead
+        },
       },
     },
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
           ui = {
             icons = {
@@ -42,11 +52,12 @@ return {
         "black", -- python formatter
         "pylint", -- python linter
         "eslint_d", -- eslint daemon (faster linting)
-        "vtsls", -- TypeScript/JavaScript LSP
+        "tsgo", -- TypeScript native LSP (typescript-go) - default TS server
+        "vtsls", -- TypeScript/JavaScript LSP - fallback for refactors
       },
     },
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
     },
   },
 }

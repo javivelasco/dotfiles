@@ -1,3 +1,6 @@
+-- Byte-compile and cache lua modules for faster startup
+vim.loader.enable()
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
