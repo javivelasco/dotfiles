@@ -9,6 +9,19 @@ return {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    picker = {
+      enabled = true,
+      win = {
+        input = {
+          keys = {
+            ["<C-j>"] = { "list_down", mode = { "i", "n" } },
+            ["<C-k>"] = { "list_up", mode = { "i", "n" } },
+            ["<C-c>"] = { "close", mode = "i" },
+          },
+        },
+      },
+    },
+    explorer = { enabled = true, replace_netrw = false }, -- oil owns netrw
     styles = {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
@@ -66,25 +79,97 @@ return {
       desc = "Git Blame Line",
     },
     {
-      "<leader>gf",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "Lazygit Current File History",
-    },
-    {
-      "<leader>gf",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "Lazygit",
-    },
-    {
       "<leader>gl",
       function()
         Snacks.lazygit.log()
       end,
       desc = "Lazygit Log (cwd)",
+    },
+    -- Pickers (former telescope keymaps)
+    {
+      "<C-p>",
+      function()
+        Snacks.picker.git_files()
+      end,
+      desc = "Search Git Files",
+    },
+    {
+      "<leader>gf",
+      function()
+        Snacks.picker.git_files()
+      end,
+      desc = "Search [G]it [F]iles",
+    },
+    {
+      "<leader>sf",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "[S]earch [F]iles",
+    },
+    {
+      "<leader><space>",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "[ ] Find existing buffers",
+    },
+    {
+      "<leader>?",
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = "[?] Find recently opened files",
+    },
+    {
+      "<leader>sh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "[S]earch [H]elp",
+    },
+    {
+      "<leader>sw",
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = "[S]earch current [W]ord",
+      mode = { "n", "x" },
+    },
+    {
+      "<leader>sd",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "[S]earch [D]iagnostics",
+    },
+    {
+      "<leader>ps",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "[P]roject [S]earch Live Grep",
+    },
+    {
+      "<leader>pS",
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = "[P]roject Resume Last Picker",
+    },
+    {
+      "<leader>/",
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = "[/] Fuzzily search in current buffer",
+    },
+    {
+      "<leader>b",
+      function()
+        Snacks.explorer.open({ cwd = vim.fn.expand("%:p:h") })
+      end,
+      desc = "[B]rowse Files",
     },
     {
       "<leader>un",
@@ -146,6 +231,12 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
+        -- Route vim.ui.select through the snacks picker (code actions, etc.)
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.ui.select = function(...)
+          return Snacks.picker.select(...)
+        end
+
         -- Setup some globals for debugging (lazy-loaded)
         _G.dd = function(...)
           Snacks.debug.inspect(...)

@@ -83,6 +83,7 @@ brew "stylua"
 brew "tldr"
 brew "tmux"
 brew "tree"
+brew "tree-sitter-cli"
 brew "uv"
 brew "vim"
 brew "wget"
@@ -96,7 +97,7 @@ brew "fsouza/prettierd/prettierd"
 brew "tursodatabase/tap/turso"
 brew "tw93/tap/mole"
 brew "mas"
-brew "dsully/tap/macos-defaults" # declarative macOS settings (see macos-defaults/)
+brew "dsully/tap/macos-defaults"
 
 # Fonts
 cask "font-fira-code-nerd-font"
@@ -130,7 +131,6 @@ cask "raycast"
 cask "google-chrome"
 
 # Communication
-# Note: zoom is MDM-managed by the org - don't track it here
 cask "discord"
 cask "slack"
 
@@ -148,7 +148,6 @@ mas "Pixea", id: 1507782672
 mas "Pure Paste", id: 1611378436
 mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
-# mas "Things 3", id: 904280696  # not on this Apple ID - needs repurchase, install manually
 mas "Velja", id: 1607635845
 mas "Vimari", id: 1480933944
 mas "WhatsApp", id: 310633997
