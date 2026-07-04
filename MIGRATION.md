@@ -45,12 +45,13 @@ Everything the dotfiles can't do for you. Work through it top to bottom.
 4. Recreate the secret files (README "Setting up a new machine" step 3), re-run `./scripts/stow`
 5. Auth logins: `gh auth login`, `vercel login`, `claude` (first run), `opencode auth login`,
    `aws sso login` / aws-vault, `gcloud auth login`
-6. Fish: install [fisher](https://github.com/jorgebucaran/fisher), then `fisher update`
-7. Node: `fnm install --lts && fnm default lts-latest`; enable corepack for pnpm: `corepack enable`
-8. tmux: just start it — tpm and plugins auto-install
-9. Yazi: `ya pkg install`
-10. Agent skills: install manually (see README, `npx skills add ...`)
-11. Import Raycast settings, sign into browsers/Slack/Spotify/etc.
+6. gh extensions: `gh extension install dlvhdr/gh-dash`
+7. Fish: install [fisher](https://github.com/jorgebucaran/fisher), then `fisher update`
+8. Node: `fnm install --lts && fnm default lts-latest`; enable corepack for pnpm: `corepack enable`
+9. tmux: just start it — tpm and plugins auto-install
+10. Yazi: `ya pkg install`
+11. Agent skills: install manually (see README, `npx skills add ...`)
+12. Import Raycast settings, sign into browsers/Slack/Spotify/etc.
 
 ## Post-migration cleanup
 
