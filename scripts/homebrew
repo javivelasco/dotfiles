@@ -19,6 +19,12 @@ else
   echo " --> Homebrew exists!"
 fi
 
+# Trust every third-party tap declared in the Brewfile (required since
+# Homebrew introduced trusted taps; safe to re-run)
+grep '^tap "' "$BREWFILE" | awk -F'"' '{print $2}' | while read -r tap; do
+  brew trust "$tap" 2>/dev/null || true
+done
+
 echo " --> Installing Brewfile from $BREWFILE"
 brew bundle check "--file=$BREWFILE" || brew bundle install "--file=$BREWFILE"
 

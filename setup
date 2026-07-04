@@ -10,6 +10,11 @@ cd "$(dirname "$0")"
 ./scripts/homebrew
 ./scripts/stow
 
+# Apply declarative macOS system settings
+if command -v macos-defaults &> /dev/null; then
+  macos-defaults apply ./macos-defaults
+fi
+
 echo ""
 echo "Remaining manual steps (see README):"
 echo "  1. Create git/.gitconfig.user and fish config-secret.fish, then re-run ./scripts/stow"

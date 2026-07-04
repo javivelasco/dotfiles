@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# Minimal bootstrap for a remote Linux dev box (e.g. EC2).
+# Installs terminal dev essentials and stows only the portable packages:
+# git, nvim, tmux. No fish, no Homebrew, no GUI apps.
+#
+# Usage (on the remote machine):
+#   git clone https://github.com/javivelasco/dotfiles.git ~/Code/dotfiles
+#   cd ~/Code/dotfiles && ./scripts/remote
+
+set -e
+
+ROOT_DIRECTORY="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT_DIRECTORY"
+
+# --- Packages -----------------------------------------------------------
+# gcc/make/unzip/tar: treesitter parsers + mason installs
+# nodejs/npm: LSP servers (vtsls, tsgo, eslint_d, prettierd) via mason
+PACKAGES=(git stow tmux gcc make unzip tar nodejs npm ripgrep fd-find fzf git-delta)
+
+if command -v dnf &> /dev/null; then
+  INSTALL="sudo dnf install -y"
+elif command -v apt-get &> /dev/null; then
+  sudo apt-get update
+  INSTALL="sudo apt-get install -y"
+else
+  echo "ERROR: no dnf or apt-get found" >&2
+  exit 1
+fi
+
+echo " --> Installing packages"
+for pkg in "${PACKAGES[@]}"; do
+  $INSTALL "$pkg" 2>/dev/null || echo "     (skipped: $pkg not available)"
+done
+
+# --- Neovim (distro versions are too old for this config; needs >= 0.11) --
+if ! command -v nvim &> /dev/null || ! nvim --headless +'lua assert(vim.fn.has("nvim-0.11") == 1)' +q 2>/dev/null; then
+  echo " --> Installing neovim from the official release tarball"
+  case "$(uname -m)" in
+    aarch64|arm64) NVIM_ARCH="linux-arm64" ;;
+    *) NVIM_ARCH="linux-x86_64" ;;
+  esac
+  curl -fsSL -o /tmp/nvim.tar.gz \
+    "https://github.com/neovim/neovim/releases/latest/download/nvim-${NVIM_ARCH}.tar.gz"
+  sudo rm -rf "/opt/nvim-${NVIM_ARCH}"
+  sudo tar -C /opt -xzf /tmp/nvim.tar.gz
+  sudo ln -sf "/opt/nvim-${NVIM_ARCH}/bin/nvim" /usr/local/bin/nvim
+  rm /tmp/nvim.tar.gz
+fi
+echo "     $(nvim --version | head -1)"
+
+# --- Git identity (machine-local, gitignored) -----------------------------
+if [ ! -f git/.gitconfig.user ]; then
+  echo " --> Creating git/.gitconfig.user (edit name/email!)"
+  cat > git/.gitconfig.user <<'EOF'
+[user]
+	name = Javi Velasco
+	email = javivelasco@example.com
+EOF
+  # No delta on this box? Fall back to less so git doesn't break.
+  if ! command -v delta &> /dev/null; then
+    printf '\n[core]\n\tpager = less\n' >> git/.gitconfig.user
+  fi
+fi
+
+# --- Stow the portable packages -------------------------------------------
+echo " --> Stowing git nvim tmux"
+stow --target "$HOME" --restow git nvim tmux
+
+echo " --> Done! Start tmux (plugins auto-install) and nvim (plugins + LSPs auto-install)."
+echo "     Remember to edit git/.gitconfig.user with your real email."

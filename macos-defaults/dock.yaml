@@ -1,0 +1,10 @@
+---
+description: Dock - autohide, no recents
+sudo: false
+current_host: false
+kill: ["Dock"]
+data:
+  com.apple.dock:
+    autohide: true
+    tilesize: 52
+    show-recents: false

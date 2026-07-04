@@ -3,8 +3,14 @@ cask_args adopt: true
 
 tap "cargo-lambda/cargo-lambda"
 tap "cloudflare/cloudflare"
+tap "ctrlspice/otel-desktop-viewer"
+tap "datadog-labs/pack"
+tap "dsully/tap"
+tap "equinix-labs/otel-cli"
 tap "fsouza/prettierd"
+tap "libsql/sqld" # dependency of tursodatabase/tap/turso
 tap "tursodatabase/tap"
+tap "tw93/tap"
 brew "xz"
 brew "libtiff"
 brew "little-cms2"
@@ -12,8 +18,6 @@ brew "webp"
 brew "jpeg-xl"
 brew "aom"
 brew "aws-iam-authenticator"
-brew "pycparser"
-brew "cffi"
 brew "docutils"
 brew "python@3.11"
 brew "awscli"
@@ -28,7 +32,6 @@ brew "lima"
 brew "colima"
 brew "coreutils"
 brew "deno"
-brew "docker"
 brew "docker-compose"
 brew "editorconfig"
 brew "eza"
@@ -77,7 +80,6 @@ brew "zoxide"
 brew "starship"
 brew "stow"
 brew "stylua"
-brew "terraform"
 brew "tldr"
 brew "tmux"
 brew "tree"
@@ -87,9 +89,14 @@ brew "wget"
 brew "yarn"
 brew "zlib"
 brew "cargo-lambda/cargo-lambda/cargo-lambda"
+cask "ctrlspice/otel-desktop-viewer/otel-desktop-viewer"
+brew "datadog-labs/pack/pup"
+brew "equinix-labs/otel-cli/otel-cli"
 brew "fsouza/prettierd/prettierd"
 brew "tursodatabase/tap/turso"
+brew "tw93/tap/mole"
 brew "mas"
+brew "dsully/tap/macos-defaults" # declarative macOS settings (see macos-defaults/)
 
 # Fonts
 cask "font-fira-code-nerd-font"
@@ -98,7 +105,7 @@ cask "font-symbols-only-nerd-font"
 
 # CLI-adjacent casks
 cask "aws-vault-binary"
-cask "cf-terraforming"
+brew "cloudflare/cloudflare/cf-terraforming"
 cask "gcloud-cli"
 cask "minisim"
 cask "ngrok"
@@ -113,7 +120,7 @@ cask "rapidapi"
 # Productivity
 cask "cleanshot"
 cask "hyperkey"
-cask "linear-linear"
+cask "linear"
 cask "notion"
 cask "notion-calendar"
 cask "obsidian"
@@ -123,9 +130,9 @@ cask "raycast"
 cask "google-chrome"
 
 # Communication
+# Note: zoom is MDM-managed by the org - don't track it here
 cask "discord"
 cask "slack"
-cask "zoom"
 
 # Media & misc
 cask "calibre"
@@ -141,7 +148,7 @@ mas "Pixea", id: 1507782672
 mas "Pure Paste", id: 1611378436
 mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
-mas "Things 3", id: 904280696
+# mas "Things 3", id: 904280696  # not on this Apple ID - needs repurchase, install manually
 mas "Velja", id: 1607635845
 mas "Vimari", id: 1480933944
 mas "WhatsApp", id: 310633997

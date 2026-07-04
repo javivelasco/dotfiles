@@ -1,0 +1,8 @@
+---
+description: Keyboard - fast key repeat
+sudo: false
+current_host: false
+data:
+  NSGlobalDomain:
+    KeyRepeat: 2
+    InitialKeyRepeat: 15

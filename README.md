@@ -28,6 +28,14 @@ cat > git/.gitconfig.user <<'EOF'
 [user]
 	name = Your Name
 	email = you@example.com
+
+# Commit signing via 1Password (macOS only — omit on remote boxes)
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
 EOF
 touch fish/.config/fish/config-secret.fish  # tokens/env vars, optional
 
@@ -39,6 +47,17 @@ Then finish the per-tool bootstrap steps below (Fish, Tmux, Yazi).
 
 > The list of stowed packages lives in `./scripts/stow` — update it there
 > when adding or removing a package.
+
+### Remote Linux box (EC2)
+
+For a terminal-only dev box, use the minimal bootstrap instead of `./setup`. It installs the essentials (nvim from the official tarball, tmux, node for LSPs) and stows only the portable packages (`git`, `nvim`, `tmux`):
+
+```bash
+git clone https://github.com/javivelasco/dotfiles.git ~/Code/dotfiles
+cd ~/Code/dotfiles && ./scripts/remote
+```
+
+Clipboard works over SSH: tmux uses OSC 52 (`set-clipboard on`) and neovim auto-detects it, so yanks land on your local clipboard through ghostty.
 
 ### Claude Code
 
@@ -74,6 +93,14 @@ After stowing on a new machine, verify skill state:
 ```bash
 npx skills check
 npx skills update
+```
+
+### macOS settings
+
+System settings (key repeat, Dock, Finder) live declaratively in `macos-defaults/` and are applied by `./setup` using [macos-defaults](https://github.com/dsully/macos-defaults) (installed from the Brewfile). To apply manually after editing:
+
+```bash
+macos-defaults apply ./macos-defaults
 ```
 
 ### OpenCode

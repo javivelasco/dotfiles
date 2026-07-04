@@ -1,0 +1,10 @@
+---
+description: Finder - list view, show file extensions
+sudo: false
+current_host: false
+kill: ["Finder"]
+data:
+  com.apple.finder:
+    FXPreferredViewStyle: Nlsv
+  NSGlobalDomain:
+    AppleShowAllExtensions: true
