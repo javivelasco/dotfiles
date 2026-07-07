@@ -66,7 +66,7 @@ brew "kubernetes-cli"
 brew "lazydocker"
 brew "lazygit"
 brew "libzip"
-brew "lua@5.1"
+brew "lua@5.4"
 brew "luarocks"
 brew "make"
 brew "neovim"
@@ -149,6 +149,5 @@ mas "Pure Paste", id: 1611378436
 mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
 mas "Velja", id: 1607635845
-mas "Vimari", id: 1480933944
 mas "WhatsApp", id: 310633997
 mas "Xcode", id: 497799835
