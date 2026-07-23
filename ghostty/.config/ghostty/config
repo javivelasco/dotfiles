@@ -1,7 +1,7 @@
-font-family = FiraCode Nerd Font Mono
+font-family = JetBrains Mono
 font-feature = ss03
 font-feature = ss05
-font-size = 14.5
+font-size = 14
 
 # Stretch font rendering
 adjust-cell-width = -3%

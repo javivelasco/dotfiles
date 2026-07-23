@@ -235,3 +235,6 @@ if not string match -q -- "$PNPM_HOME/bin" $PATH
   set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
+
+# Pi
+fish_add_path "/Users/javivelasco/.local/share/fnm/node-versions/v24.18.0/installation/bin"
