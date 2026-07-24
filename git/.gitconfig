@@ -188,3 +188,5 @@
 
 [rerere]
 	enabled = true
+[user]
+	email = javier.velasco86@gmail.com

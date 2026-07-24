@@ -238,3 +238,6 @@ end
 
 # Pi
 fish_add_path "/Users/javivelasco/.local/share/fnm/node-versions/v24.18.0/installation/bin"
+
+# opencode
+fish_add_path /Users/javivelasco/.opencode/bin
