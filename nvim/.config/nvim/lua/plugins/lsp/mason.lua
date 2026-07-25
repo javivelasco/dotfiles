@@ -52,6 +52,8 @@ return {
         "black", -- python formatter
         "pylint", -- python linter
         "eslint_d", -- eslint daemon (faster linting)
+        "oxlint", -- oxc linter (used in repos with .oxlintrc, e.g. vercel/api)
+        "oxfmt", -- oxc formatter (used in repos with .oxfmtrc, e.g. vercel/api)
         "tsgo", -- TypeScript native LSP (typescript-go) - default TS server
         "vtsls", -- TypeScript/JavaScript LSP - fallback for refactors
       },
