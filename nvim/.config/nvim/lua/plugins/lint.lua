@@ -32,6 +32,17 @@ return {
 
     local function run_lint()
       local bufnr = vim.api.nvim_get_current_buf()
+      local filename = vim.api.nvim_buf_get_name(bufnr)
+
+      -- Vale expects both an installed executable and a real file path. Pi can
+      -- open temporary Markdown files, while BufNewFile can have no path yet.
+      if
+        vim.bo[bufnr].filetype == "markdown"
+        and (vim.fn.executable("vale") == 0 or filename == "" or vim.fn.filereadable(filename) == 0)
+      then
+        return
+      end
+
       if js_fts[vim.bo[bufnr].filetype] then
         lint.try_lint(js_linters(bufnr))
       else
