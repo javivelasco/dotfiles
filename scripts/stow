@@ -24,6 +24,7 @@ PACKAGES=(
   opencode
   starship
   tmux
+  tuicr
   yazi
 )
 
