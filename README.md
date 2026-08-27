@@ -95,6 +95,27 @@ npx skills check
 npx skills update
 ```
 
+### Pi
+
+The `pi` package manages `~/.pi/agent/settings.json` and a custom Gruvbox theme.
+The settings include the default model, reasoning level, and installed Pi packages.
+Runtime and machine-local data (`auth.json`, `trust.json`, sessions, model caches,
+and installed package files) stays outside the repository.
+
+Pi is installed in the active `fnm` Node environment. After installing an LTS
+Node version, install Pi and authenticate the configured provider:
+
+```bash
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+pi
+/login  # Select Vercel AI Gateway
+```
+
+On startup, Pi reads the stowed settings and installs the configured
+`pi-web-access` package if it is missing. Shared agent skills belong under
+`agents/.agents/skills/`, which Pi discovers automatically through
+`~/.agents/skills/`.
+
 ### macOS settings
 
 System settings (key repeat, Dock, Finder) live declaratively in `macos-defaults/` and are applied by `./setup` using [macos-defaults](https://github.com/dsully/macos-defaults) (installed from the Brewfile). To apply manually after editing:

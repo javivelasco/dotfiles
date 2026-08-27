@@ -22,6 +22,7 @@ PACKAGES=(
   git
   nvim
   opencode
+  pi
   starship
   tmux
   tuicr
@@ -33,7 +34,7 @@ PACKAGES=(
 # on a fresh machine Claude Code history, fisher plugins, etc. would be
 # written straight into the repo working tree.
 # (~/.agents intentionally folds: skills are managed inside the repo.)
-mkdir -p "$HOME/.config/fish" "$HOME/.config/opencode" "$HOME/.claude"
+mkdir -p "$HOME/.config/fish" "$HOME/.config/opencode" "$HOME/.claude" "$HOME/.pi/agent"
 
 echo " --> Stowing packages: ${PACKAGES[*]}"
 stow --dir "$ROOT_DIRECTORY" --target "$HOME" --restow --verbose "${PACKAGES[@]}"

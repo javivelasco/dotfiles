@@ -46,11 +46,14 @@ Everything the dotfiles can't do for you. Work through it top to bottom.
 5. Agent CLIs (official installers, not brew/npm — they self-update):
    `curl -fsSL https://opencode.ai/install | bash` and
    `curl -fsSL https://claude.ai/install.sh | bash`
-6. Auth logins: `gh auth login`, `vercel login`, `claude` (first run), `opencode auth login`,
-   `aws sso login` / aws-vault, `gcloud auth login`
-7. gh extensions: `gh extension install dlvhdr/gh-dash`
-8. Fish: install [fisher](https://github.com/jorgebucaran/fisher), then `fisher update`
-9. Node: `fnm install --lts && fnm default lts-latest`; enable corepack for pnpm: `corepack enable`
+6. Node and Pi: `fnm install --lts && fnm default lts-latest`, enable corepack with
+   `corepack enable`, then run
+   `npm install -g --ignore-scripts @earendil-works/pi-coding-agent`
+7. Auth logins: `gh auth login`, `vercel login`, `claude` (first run), `opencode auth login`,
+   `pi` followed by `/login` for Vercel AI Gateway, `aws sso login` / aws-vault,
+   and `gcloud auth login`
+8. gh extensions: `gh extension install dlvhdr/gh-dash`
+9. Fish: install [fisher](https://github.com/jorgebucaran/fisher), then `fisher update`
 10. tmux: just start it — tpm and plugins auto-install
 11. Yazi: `ya pkg install`
 12. Agent skills: install manually (see README, `npx skills add ...`)

@@ -1,0 +1,7 @@
+{
+  "theme": "gruvbox",
+  "defaultProvider": "vercel-ai-gateway",
+  "defaultModel": "openai/gpt-5.6-sol",
+  "defaultThinkingLevel": "medium",
+  "packages": ["npm:pi-web-access"]
+}
