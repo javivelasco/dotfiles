@@ -7,3 +7,7 @@ fish/.config/fish/config-secret.fish
 # Project-level Claude config (not the stow package)
 /.claude
 
+# Installed agent skills (may come from private/internal repos; reinstall manually)
+agents/.agents/skills/
+agents/.agents/.skill-lock.json
+
