@@ -64,6 +64,7 @@ return {
       },
       formatters_by_ft = {
         css = { "prettierd" },
+        go = { "gofmt" },
         html = { "prettierd" },
         javascript = js_formatter,
         javascriptreact = js_formatter,
