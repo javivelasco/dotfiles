@@ -1,6 +1,6 @@
 -- TypeScript LSP setup with two interchangeable servers:
 --
---   * tsgo (typescript-go): native Go port of tsserver. Much faster project
+--   * tsc: stable TypeScript 7 native Go compiler/LSP. Fast project
 --     load, diagnostics and navigation. DEFAULT.
 --   * vtsls: wrapper around VSCode's TS extension. Full-featured (rename file,
 --     organize imports, move to file, etc). Fallback for heavy refactors.
@@ -50,22 +50,21 @@ return {
       },
     })
 
-    -- tsgo settings (nvim-lspconfig ships the base config; it prefers the
-    -- project-local node_modules/.bin/tsgo binary automatically)
-    vim.lsp.config("tsgo", {
+    -- The bundled config prefers a project-local TypeScript 7+ binary,
+    -- skipping older tsc versions in favor of Mason's native compiler.
+    vim.lsp.config("tsc", {
       settings = {
-        typescript = { inlayHints = inlay_hints },
-        javascript = { inlayHints = inlay_hints },
+        ["js/ts"] = { inlayHints = inlay_hints },
       },
     })
 
-    -- tsgo is the default; vtsls only on demand
+    -- tsc is the default; vtsls only on demand
     vim.lsp.enable("vtsls", false)
-    vim.lsp.enable("tsgo")
+    vim.lsp.enable("tsc")
 
-    local current = "tsgo"
+    local current = "tsc"
     local function toggle_ts_server()
-      local next_server = current == "tsgo" and "vtsls" or "tsgo"
+      local next_server = current == "tsc" and "vtsls" or "tsc"
       vim.lsp.enable(current, false) -- stops running clients (nvim 0.11.2+)
       vim.lsp.enable(next_server)
       current = next_server
@@ -79,11 +78,11 @@ return {
     end
 
     vim.api.nvim_create_user_command("TSServerToggle", toggle_ts_server, {
-      desc = "Toggle between tsgo (fast) and vtsls (full refactors)",
+      desc = "Toggle between tsc (native) and vtsls (full refactors)",
     })
     vim.keymap.set("n", "<leader>ts", toggle_ts_server, {
       silent = true,
-      desc = "Toggle TS server (tsgo ↔ vtsls)",
+      desc = "Toggle TS server (tsc ↔ vtsls)",
     })
 
     -- TypeScript-specific keybindings via nvim-vtsls commands (vtsls only)

@@ -14,16 +14,20 @@ return {
         "emmet_ls",
         "prismals",
         "pyright",
-        -- Note: TypeScript servers (tsgo/vtsls) are configured in typescript.lua
+        -- Note: TypeScript servers (tsc/vtsls) are configured in typescript.lua
       },
       -- mason-lspconfig v2 auto-enables every installed server via vim.lsp.enable.
       -- Exclude the ones we manage manually (TS toggle) or don't want at all.
       automatic_enable = {
         exclude = {
-          "tsgo",
+          "tsc",
+          "tsgo", -- don't auto-enable an old preview installation
           "vtsls",
           "ts_ls",
           "eslint", -- we lint with eslint_d through nvim-lint instead
+          "oxlint", -- managed by nvim-lint, not a second LSP client
+          "oxfmt", -- managed by conform.nvim
+          "stylua", -- managed by conform.nvim
         },
       },
     },
@@ -55,7 +59,7 @@ return {
         "eslint_d", -- eslint daemon (faster linting)
         "oxlint", -- oxc linter (used in repos with .oxlintrc, e.g. vercel/api)
         "oxfmt", -- oxc formatter (used in repos with .oxfmtrc, e.g. vercel/api)
-        "tsgo", -- TypeScript native LSP (typescript-go) - default TS server
+        "tsc", -- stable TypeScript 7 native compiler/LSP - default TS server
         "vtsls", -- TypeScript/JavaScript LSP - fallback for refactors
       },
     },

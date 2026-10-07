@@ -1,7 +1,7 @@
 -- Disable LSP servers we don't want auto-started
--- TypeScript servers (tsgo default, vtsls fallback) are managed in plugins/typescript.lua
+-- TypeScript servers (tsc default, vtsls fallback) are managed in plugins/typescript.lua
 vim.lsp.enable("ts_ls", false)
-vim.lsp.enable("vtsls", false) -- typescript.lua enables tsgo and toggles vtsls on demand
+vim.lsp.enable("vtsls", false) -- typescript.lua enables tsc and toggles vtsls on demand
 
 -- Disable eslint LSP (we use nvim-lint with eslint_d instead)
 vim.lsp.enable("eslint", false)
@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
     opts.desc = "Restart LSP"
-    keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+    keymap.set("n", "<leader>rs", "<cmd>lsp restart<CR>", opts)
 
     opts.desc = "Toggle Inlay Hints"
     keymap.set("n", "<leader>ih", function()

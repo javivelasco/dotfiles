@@ -2,18 +2,13 @@ return {
   -- Highlight other uses of the current word
   "RRethy/vim-illuminate",
   config = function()
-    vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree" }
-    vim.api.nvim_set_keymap(
-      "n",
-      "<a-n>",
-      '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>',
-      { noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "<a-p>",
-      '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>',
-      { noremap = true }
-    )
+    local illuminate = require("illuminate")
+    illuminate.configure({ filetypes_denylist = { "dirbuf", "dirvish", "fugitive", "alpha", "NvimTree", "neo-tree" } })
+    vim.keymap.set("n", "<a-n>", function()
+      illuminate.goto_next_reference(true)
+    end, { desc = "Next reference" })
+    vim.keymap.set("n", "<a-p>", function()
+      illuminate.goto_prev_reference(true)
+    end, { desc = "Previous reference" })
   end,
 }

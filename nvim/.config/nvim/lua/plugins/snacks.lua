@@ -231,12 +231,6 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
-        -- Route vim.ui.select through the snacks picker (code actions, etc.)
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.ui.select = function(...)
-          return Snacks.picker.select(...)
-        end
-
         -- Setup some globals for debugging (lazy-loaded)
         _G.dd = function(...)
           Snacks.debug.inspect(...)
