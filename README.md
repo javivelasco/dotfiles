@@ -59,6 +59,26 @@ cd ~/Code/dotfiles && ./scripts/remote
 
 Clipboard works over SSH: tmux uses OSC 52 (`set-clipboard on`) and neovim auto-detects it, so yanks land on your local clipboard through ghostty.
 
+### Shared coding-agent instructions
+
+Edit `agents/.agents/AGENTS.md` for global instructions shared by Pi, Claude Code,
+Codex, and OpenCode. The agent-specific files are relative symlinks to this one
+canonical file:
+
+| Agent | Stowed global instructions |
+|---|---|
+| Pi | `~/.pi/agent/AGENTS.md` |
+| Claude Code | `~/.claude/CLAUDE.md` |
+| Codex | `~/.codex/AGENTS.md` |
+| OpenCode | `~/.config/opencode/AGENTS.md` |
+
+Commit and push changes to the shared file. On another machine, pull this repo
+and run `./scripts/stow`. In Pi, run `/reload`; restart other agents to reload
+their instructions. These links assume the default agent config directories;
+custom config locations need corresponding links. Global `AGENTS.override.md`
+files can supersede the shared instructions in Pi and Codex. Other coding agents
+need an adapter for their own supported global-instructions location.
+
 ### Claude Code
 
 Configuration for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI.
@@ -66,7 +86,7 @@ Configuration for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 
 **`claude` package** manages `~/.claude/`:
 
 - `settings.json` - Model preferences and permissions
-- `CLAUDE.md` - Personal memory/instructions for all projects
+- `CLAUDE.md` - Symlink to the shared coding-agent instructions
 - `lessons.md` - Patterns learned from corrections (self-improvement loop)
 - `agents/` - Custom subagents (software-architect, linear-* integrations)
 - `rules/` - Personal coding rules (modular .md files)
@@ -75,6 +95,7 @@ Runtime data (history, cache, telemetry, todos) is excluded via `.stow-local-ign
 
 **`agents` package** manages `~/.agents/`:
 
+- `AGENTS.md` - Canonical global instructions shared by the coding-agent packages
 - `skills/` - Reusable AI agent skills from [skills.sh](https://skills.sh/)
 - `.skill-lock.json` - Tracks skill sources and versions for updates
 
@@ -97,7 +118,8 @@ npx skills update
 
 ### Pi
 
-The `pi` package manages `~/.pi/agent/settings.json` and a custom Gruvbox theme.
+The `pi` package manages `~/.pi/agent/settings.json`, the shared `AGENTS.md` link,
+and a custom Gruvbox theme.
 The settings include the default model, reasoning level, and installed Pi packages.
 Runtime and machine-local data (`auth.json`, `trust.json`, sessions, model caches,
 and installed package files) stays outside the repository.
@@ -126,7 +148,13 @@ macos-defaults apply ./macos-defaults
 
 ### OpenCode
 
-The `opencode` package manages `~/.config/opencode/opencode.json` (MCP servers and preferences). Runtime data (auth, node_modules, machine-local skills) stays out of the repo.
+The `opencode` package manages `~/.config/opencode/opencode.json` (MCP servers and preferences) and the shared `AGENTS.md` link. Runtime data (auth, node_modules, machine-local skills) stays out of the repo.
+
+### Codex
+
+The `codex` package manages only `~/.codex/AGENTS.md`, linked to the shared
+instructions. The stow script keeps `~/.codex` as a real directory so credentials,
+sessions, and other machine-local data stay outside the repository.
 
 ### Fish
 
