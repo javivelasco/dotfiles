@@ -156,3 +156,35 @@ and explain disagreements directly and respectfully.
 - Report validation blockers and checks you could not complete honestly.
   Do not bypass environment or authentication restrictions to make
   tests run.
+
+# Sub-agents and independent review
+
+- Use sub-agents when focused investigation, parallel work, or independent
+  review would improve the outcome. Give each a narrow scope, relevant
+  context, and a clear deliverable.
+
+- When Javi explicitly requests sub-agents, use them if supported.
+  Treat requests for an exhaustive review or contrasted opinions as
+  requests for independent sub-agent assessments.
+
+- For these reviews, prefer multiple current, high-capability models
+  from different model families when the environment supports model
+  selection. Verify which models are available rather than assuming
+  model names or versions. Otherwise, use independent sub-agents with
+  the available model.
+
+- Have reviewers form their initial assessments independently before
+  sharing conclusions. Give them the problem, constraints, and evidence
+  without steering them toward the lead agent's preferred answer.
+
+- Synthesize the findings into one recommendation. Resolve disagreements
+  using evidence and explicit tradeoffs rather than majority vote.
+  Surface material disagreements or uncertainty that remain unresolved.
+
+- Keep delegation proportional to the task. The lead agent remains
+  responsible for checking findings and integrating the result.
+  Sub-agents must respect the same scope and review boundaries.
+
+- If delegation or model diversity is unavailable, state the limitation
+  briefly and provide the strongest review the environment supports.
+  Do not present simulated perspectives as independent agent reviews.
