@@ -1,0 +1,41 @@
+{
+  "name": "gruvbox-dark",
+  "type": "dark",
+  "colors": {
+    "divider": "#665c54",
+    "hint": "#bdae93",
+    "statusline": "#bdae93",
+    "tag": { "fg": "#e5d3a2", "bold": true },
+    "subtitle": { "fg": "#fe8019", "bold": true },
+    "system_notice_label": { "fg": "#d3869b", "bold": true },
+    "system_notice_text": "#bdae93",
+    "dim": "#928374",
+    "warning": "#fabd2f",
+    "green": "#b8bb26",
+    "red": "#fb4934",
+    "diff_added": "#b8bb26",
+    "diff_removed": "#fb4934",
+    "diff_added_marker": "#b8bb26",
+    "diff_removed_marker": "#fb4934",
+    "approval_button_active": { "fg": "#282828", "bg": "#83a598", "bold": true },
+    "approval_button_inactive": { "fg": "#e5d3a2", "bg": "#3c3836" },
+    "selected_completion": { "fg": "#fabd2f", "bold": true },
+    "permission_auto": "#8ec07c",
+    "user_card_marker": "#8ec07c",
+    "user_card_accent": "#e5d3a2",
+    "inline_code": "#8ec07c",
+    "task_completed": "#b8bb26",
+    "tool_stdout": "#bdae93",
+    "tool_stderr": "#fe8019",
+    "link": "#83a598"
+  },
+  "syntax": {
+    "keyword": "#fb4934",
+    "string": "#b8bb26",
+    "number": "#d3869b",
+    "comment": { "fg": "#928374", "italic": true },
+    "function": "#83a598",
+    "variable": "#ebdbb2",
+    "operator": "#8ec07c"
+  }
+}

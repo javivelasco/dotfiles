@@ -11,6 +11,7 @@ set -gx HOMEBREW_SHELLENV_PREFIX /opt/homebrew
 set -gx MANPATH /opt/homebrew/share/man $MANPATH
 set -gx INFOPATH $INFOPATH /opt/homebrew/share/info
 set -gx BAT_THEME "gruvbox-dark"
+set -gx FX_THEME "gruvbox-dark"
 
 set -gx PNPM_HOME $HOME/Library/pnpm
 set -gx GOPATH "$HOME/.go"

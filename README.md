@@ -138,6 +138,14 @@ On startup, Pi reads the stowed settings and installs the configured
 `agents/.agents/skills/`, which Pi discovers automatically through
 `~/.agents/skills/`.
 
+### fx
+
+The `fx` package manages only `~/.fx/themes/gruvbox-dark.json`, a Gruvbox theme
+matching the Ghostty and Pi palettes. Fish selects it with `FX_THEME`, so
+`~/.fx/settings.json` stays machine-local. The stow script keeps `~/.fx` as a
+real directory so credentials, sessions, and other runtime data stay outside the
+repository.
+
 ### macOS settings
 
 System settings (key repeat, Dock, Finder) live declaratively in `macos-defaults/` and are applied by `./setup` using [macos-defaults](https://github.com/dsully/macos-defaults) (installed from the Brewfile). To apply manually after editing:
