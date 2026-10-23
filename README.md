@@ -62,8 +62,9 @@ Clipboard works over SSH: tmux uses OSC 52 (`set-clipboard on`) and neovim auto-
 ### Shared coding-agent instructions
 
 Edit `agents/.agents/AGENTS.md` for global instructions shared by Pi, Claude Code,
-Codex, and OpenCode. The agent-specific files are relative symlinks to this one
-canonical file:
+Codex, OpenCode, and fx. The agent-specific files are relative symlinks to this one
+canonical file, except for fx, which skips symlinked instruction files and gets a
+copy from `./scripts/stow` instead:
 
 | Agent | Stowed global instructions |
 |---|---|
@@ -71,6 +72,7 @@ canonical file:
 | Claude Code | `~/.claude/CLAUDE.md` |
 | Codex | `~/.codex/AGENTS.md` |
 | OpenCode | `~/.config/opencode/AGENTS.md` |
+| fx | `~/.fx/AGENTS.md` (copy) |
 
 Commit and push changes to the shared file. On another machine, pull this repo
 and run `./scripts/stow`. In Pi, run `/reload`; restart other agents to reload

@@ -41,4 +41,9 @@ mkdir -p "$HOME/.config/fish" "$HOME/.config/opencode" "$HOME/.claude" "$HOME/.c
 echo " --> Stowing packages: ${PACKAGES[*]}"
 stow --dir "$ROOT_DIRECTORY" --target "$HOME" --restow --verbose "${PACKAGES[@]}"
 
+# fx skips symlinked instruction files, so it gets a regular copy instead.
+echo " --> Copying shared agent instructions to ~/.fx/AGENTS.md"
+rm -f "$HOME/.fx/AGENTS.md"
+cp "$ROOT_DIRECTORY/agents/.agents/AGENTS.md" "$HOME/.fx/AGENTS.md"
+
 echo " --> Done!"
