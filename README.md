@@ -121,7 +121,7 @@ npx skills update
 ### Pi
 
 The `pi` package manages `~/.pi/agent/settings.json`, the shared `AGENTS.md` link,
-and a custom Gruvbox theme.
+a custom Gruvbox theme, and a local sound-notification extension.
 The settings include the default model, reasoning level, and installed Pi packages.
 Runtime and machine-local data (`auth.json`, `trust.json`, sessions, model caches,
 and installed package files) stays outside the repository.
@@ -139,6 +139,16 @@ On startup, Pi reads the stowed settings and installs the configured
 `pi-web-access` package if it is missing. Shared agent skills belong under
 `agents/.agents/skills/`, which Pi discovers automatically through
 `~/.agents/skills/`.
+
+The sound extension uses macOS Glass at 25% volume when the agent fully settles
+and Pop when a blocking question or dialog opens during work. Tool activity,
+aborted runs, manually opened menus, and non-interactive sessions stay silent.
+After stowing, run `/reload` in Pi. Preview with `/sound-test done` or
+`/sound-test input`. Run its regression tests with Node 24:
+
+```bash
+node --test tests/pi-sounds.test.mjs
+```
 
 ### fx
 
