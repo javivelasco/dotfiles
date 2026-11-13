@@ -25,6 +25,7 @@ PACKAGES=(
   nvim
   opencode
   pi
+  rex
   starship
   tmux
   tuicr

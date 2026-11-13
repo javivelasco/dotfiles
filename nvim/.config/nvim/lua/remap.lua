@@ -43,6 +43,21 @@ vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<S-w>", function() Snacks.bufdelete() end, { desc = "Delete buffer" })
 
+-- Inside Rex, move between nvim splits first and hand over to Rex at the edge,
+-- like vim-tmux-navigator does under tmux. Rex leaves these keys to nvim while
+-- it is in the foreground (see rex/.config/rex/init.lua).
+if vim.env.REX_SESSION and not vim.env.TMUX then
+  for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+    vim.keymap.set("n", "<C-" .. key .. ">", function()
+      local window = vim.api.nvim_get_current_win()
+      vim.cmd.wincmd(key)
+      if vim.api.nvim_get_current_win() == window then
+        vim.system({ "rex", "focus", direction, "--session", vim.env.REX_SESSION })
+      end
+    end, { desc = "Navigate " .. direction .. " (nvim, then Rex)" })
+  end
+end
+
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize up" })
 vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize down" })
