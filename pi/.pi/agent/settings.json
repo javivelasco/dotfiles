@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "1.2.0",
+  "lastChangelogVersion": "1.5.2",
   "theme": "gruvbox",
   "defaultProvider": "vercel-ai-gateway",
-  "defaultModel": "openai/gpt-6-astra",
+  "defaultModel": "anthropic/claude-fable-5.2-fast",
   "defaultThinkingLevel": "medium",
   "defaultTools": ["+codemode"],
   "packages": [
@@ -13,5 +13,9 @@
   ],
   "skills": ["+skills/datadog/SKILL.md"],
   "collapseChangelog": true,
-  "extensions": ["-builtin:mcp"]
+  "extensions": ["-builtin:mcp"],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.87.0"
+  }
 }
