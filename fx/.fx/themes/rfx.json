@@ -1,0 +1,9 @@
+{
+  "colors": {
+    "diff_added_marker": "#7BBF7B",
+    "green": "#7BBF7B",
+    "selected_completion": "#7BBF7B",
+    "task_completed": "#7BBF7B",
+    "user_card_marker": "#7BBF7B"
+  }
+}
