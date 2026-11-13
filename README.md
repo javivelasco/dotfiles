@@ -190,6 +190,12 @@ Identity and any other personal git config live in `git/.gitconfig.user`, which 
 
 There is not a lot of special things on setting up `nvim`. After installing all `brew` dependencies it should be already there. Dependencies are managed with [lazy.nvim](https://github.com/folke/lazy.nvim) which bootstraps itself automatically on first launch and syncs plugins. LSP servers and tools are installed automatically by mason on first launch too.
 
+### Rex
+
+[Rex](https://www.superlogical.com/rex/docs/) is in beta and installed manually (it is not in the Brewfile). Its keybindings live in `rex/.config/rex/init.lua` and mirror the tmux ones, with the same `<C-s>` prefix and `<C-h/j/k/l>` to move between panes. After editing the file apply it with `rex config reload` or `<C-s>r`.
+
+Tmux stays around for remote boxes and for what Rex has no counterpart for yet: vi copy-mode, the status line, last-window (`<C-s><C-a>`), and the tpm plugins. Inside nvim `<C-h/j/k/l>` moves between nvim splits first and hands over to Rex at the edge (see `nvim/.config/nvim/lua/remap.lua`), like vim-tmux-navigator does under tmux.
+
 ### Tmux
 
 Dependencies are managed with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm). On a fresh machine tpm and all plugins install themselves automatically the first time tmux starts. To install/update plugins manually use Prefix plus capital I (`<C-s>I`) or U.
